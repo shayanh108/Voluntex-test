@@ -21,7 +21,7 @@ const organizations = [
         phone: "(905) 457-7288",
         address: "350 Industrial Parkway S. Aurora ON Canada L4G 3V7",
         description: "CALL FIRST: Offers in-school mentoring and event volunteering for high school students (16+).",
-        image: "https://kimi-web-img.moonshot.cn/img/portraitpal.ai/cd52d2d3c3134e66574bf1369094dda00f2ebeae.jpg"
+        image: "images/bigbbrotherbigsistersyork.png"
     },
     {
         name: "Jericho Youth Services",
