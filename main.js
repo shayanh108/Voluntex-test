@@ -31,7 +31,7 @@ const organizations = [
         phone: "905-722-5540",
         address: "20849 Dalton Rd, Keswick, ON L4P 3E9",
         description: "After-school program helpers and recreational activity support for youth.",
-        image: "https://kimi-web-img.moonshot.cn/img/jcpportraits.com/839deb1b64843e369330496136d57438cf093969.jpg"
+        image: "images/jericho.jpg"
     },
 {
   name: "Food Bank of York Region",
