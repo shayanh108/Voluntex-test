@@ -61,7 +61,7 @@ const organizations = [
         phone: "905-841-3977",
         address: "15150 Yonge St Suite 201, Aurora, ON L4G 1M2",
         description: "Supports youth engagement panels, community events, and peer support.",
-        image: "https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/bf0db8737e4ede91184d781d9376aa9f0cd2a75e.png"
+        image: "images/cmhalogo.jpg"
     },
     {
         name: "CHATS",
