@@ -11,7 +11,7 @@ const organizations = [
         phone: "905-475-6694",
         address: "10415 Yonge St, Richmond Hill, ON L4C 0Z3",
         description: "Youth ambassador programs, shelter support, and school event volunteering.",
-        image: "https://kimi-web-img.moonshot.cn/img/imageio.forbes.com/8ead6e95a866adcf6edac42110ebcf2b1b7b02c7.jpg"
+        image: "images/logo-360-1.webp"
     },
     {
         name: "Big Brothers Big Sisters of Peel York",
