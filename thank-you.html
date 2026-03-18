@@ -1,79 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Thank You | VoluntEx</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You - VoluntEx</title>
 
-    <!-- Tailwind CDN for consistent styling with your site -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Redirect after 10 seconds -->
+  <meta http-equiv="refresh" content="10;url=/contact.html" />
 
-    <style>
-      /* Smooth fade-in */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .fade-in-up {
-        animation: fadeInUp 700ms ease forwards;
-      }
-    </style>
-  </head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-  <body class="min-h-screen flex items-center justify-center px-6 bg-gradient-to-br from-blue-700 via-blue-600 to-blue-500">
-    <main class="w-full max-w-lg text-center opacity-0 fade-in-up">
-      <!-- Logo (update path if needed) -->
-    <img
-  src="images/no-background-logo.png"
-  alt="VoluntEx Logo"
-  class="mx-auto mb-18 block"
-  style="width: 400px;"
-/>
+<body class="min-h-screen bg-gray-50 flex items-center justify-center px-6">
 
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-        Thanks, we got your message!
-      </h1>
+  <div class="max-w-lg w-full bg-white rounded-2xl shadow-md p-10 text-center">
+    
+    <h1 class="text-3xl font-semibold text-gray-900 mb-4">
+      Thank you
+    </h1>
 
-      <p class="text-blue-100 text-lg mb-8">
-        We’ll review your info and follow up soon.
-      </p>
+    <p class="text-gray-600 text-lg mb-6">
+      Your message has been sent successfully.
+    </p>
 
-     <div class="inline-flex items-center justify-center gap-2 text-blue-100 mb-4">
-  <span>Redirecting to Home in</span>
-  <span id="countdown" class="font-semibold text-white">5</span>
-  <span>seconds…</span>
-</div>
+    <p class="text-sm text-gray-500 mb-6">
+      You’ll be redirected shortly.
+    </p>
 
-<div class="mt-8">
-  <a
-    href="/"
-    class="inline-flex items-center justify-center bg-white text-blue-700 font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-blue-50 transition"
-  >
-    Back to Home now
-  </a>
-</div>
+    <!-- optional button -->
+    <a href="/contact.html"
+       class="inline-block mt-2 px-5 py-2 rounded-lg bg-gray-900 text-white text-sm hover:bg-gray-800 transition">
+       Go back now
+    </a>
 
-    </main>
+  </div>
 
-    <script>
-      // Auto redirect after 5 seconds + countdown
-      let seconds = 60;
-      const el = document.getElementById("countdown");
-
-      const tick = setInterval(() => {
-        seconds--;
-        if (el) el.textContent = String(seconds);
-        if (seconds <= 0) {
-          clearInterval(tick);
-          window.location.href = "/";
-        }
-      }, 1000);
-    </script>
-  </body>
+</body>
 </html>
