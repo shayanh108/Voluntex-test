@@ -500,86 +500,99 @@ function findMatchingOrganizations(fieldOfInterest) {
 function displayMatchedOrganizations(matchedOrgs, studentData) {
     const resultsSection = document.getElementById('matchingResults');
     const resultsContainer = document.getElementById('matchedOrganizations');
-    
+
     if (!resultsSection || !resultsContainer) return;
-    
-    // Clear previous results
+
     resultsContainer.innerHTML = '';
-    
-    // Show results section
+
+    // Reveal section with fade+slide animation
     resultsSection.classList.remove('hidden');
-    resultsSection.scrollIntoView({ behavior: 'smooth' });
-    
-    // Create organization cards
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            resultsSection.style.opacity = '1';
+            resultsSection.style.transform = 'translateY(0)';
+        });
+    });
+
+    setTimeout(() => {
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+
+    // Add personalized message
+    const message = document.createElement('div');
+    message.className = 'col-span-full text-center mb-10';
+    message.innerHTML = `
+        <p class="text-lg text-blue-300 font-medium">
+            We found <span class="text-white font-bold text-2xl">${matchedOrgs.length}</span> ${matchedOrgs.length === 1 ? 'organization' : 'organizations'} that match your interests.
+        </p>
+        <p class="text-slate-400 text-sm mt-1">Click a card to learn more or contact them directly.</p>
+    `;
+    resultsContainer.appendChild(message);
+
+    // Create organization cards with staggered delay
     matchedOrgs.forEach((org, index) => {
         const card = createOrganizationCard(org, index);
         resultsContainer.appendChild(card);
     });
-    
-    // Add personalized message
-    const message = document.createElement('div');
-    message.className = 'text-center mb-8';
-    message.innerHTML = `
-        <h3 class="text-2xl font-semibold text-gray-600 
- dark:text-white
- mb-4">
-            Great news! We found ${matchedOrgs.length} organizations that match your interests.
-        </h3>
-        <p class="text-gray-600 dark:text-gray-300">
-            Click on any organization below to learn more and get in touch.
-        </p>
-    `;
-    resultsContainer.insertBefore(message, resultsContainer.firstChild);
 }
 
 function createOrganizationCard(org, index) {
     const card = document.createElement('div');
-    card.className = 'organization-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-xl';
-    
+    card.style.cssText = 'opacity:0;transform:translateY(30px);transition:opacity 0.5s ease,transform 0.5s ease;';
+    card.className = 'organization-card rounded-2xl overflow-hidden flex flex-col';
+    card.style.background = 'rgba(255,255,255,0.05)';
+    card.style.border = '1px solid rgba(255,255,255,0.1)';
+    card.style.backdropFilter = 'blur(12px)';
+
     card.innerHTML = `
-        <div class="relative">
-            <img src="${org.image}" alt="${org.name}" class="w-full h-48 object-cover">
-            <div class="absolute top-4 right-4 bg-blue-600 text-black
- dark:text-white
- px-3 py-1 rounded-full text-sm font-medium">
+        <div class="relative overflow-hidden" style="height:200px;">
+            <img src="${org.image}" alt="${org.name}" class="w-full h-full object-cover" style="transition:transform 0.5s ease;">
+            <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(15,23,42,0.85) 0%,transparent 60%);"></div>
+            <span style="position:absolute;top:14px;right:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;font-size:0.72rem;font-weight:600;padding:4px 12px;border-radius:999px;letter-spacing:0.05em;text-transform:uppercase;">
                 ${org.causeArea}
-            </div>
+            </span>
         </div>
-        <div class="p-6">
-            <h3 class="text-xl font-semibold text-gray-600 
- dark:text-white
- mb-2">${org.name}</h3>
-            <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">${org.description}</p>
-            <div class="flex flex-wrap gap-2 mb-4">
-                <span class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-sm">
+        <div style="padding:1.5rem;display:flex;flex-direction:column;flex:1;gap:0.75rem;">
+            <h3 style="font-size:1.2rem;font-weight:700;color:#fff;margin:0;">${org.name}</h3>
+            <p style="color:#94a3b8;font-size:0.92rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">${org.description}</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:0.5rem;">
+                <span style="background:rgba(255,255,255,0.07);color:#cbd5e1;font-size:0.8rem;padding:4px 10px;border-radius:6px;display:flex;align-items:center;gap:5px;">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                     ${org.phone}
                 </span>
-                <span class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-2 py-1 rounded text-sm">
-                    ${org.address.split(',')[1] || 'York Region'}
+                <span style="background:rgba(255,255,255,0.07);color:#cbd5e1;font-size:0.8rem;padding:4px 10px;border-radius:6px;display:flex;align-items:center;gap:5px;">
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    ${org.address.split(',')[1] ? org.address.split(',')[1].trim() : 'York Region'}
                 </span>
             </div>
-            <div class="flex gap-3">
-                <button onclick="viewOrganizationDetails('${org.name}')" 
-                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-black
- dark:text-white
- font-medium py-2 px-4 rounded transition-colors">
+            <div style="display:flex;gap:10px;margin-top:0.5rem;">
+                <button onclick="viewOrganizationDetails('${org.name}')"
+                    style="flex:1;padding:10px 0;border-radius:10px;border:1px solid rgba(99,102,241,0.5);background:rgba(99,102,241,0.15);color:#a5b4fc;font-weight:600;font-size:0.9rem;cursor:pointer;transition:background 0.2s,color 0.2s;"
+                    onmouseover="this.style.background='rgba(99,102,241,0.35)';this.style.color='#fff';"
+                    onmouseout="this.style.background='rgba(99,102,241,0.15)';this.style.color='#a5b4fc';">
                     ${translations[currentLanguage].viewDetails}
                 </button>
                 <button onclick="contactOrganization('${org.name}', '${org.email}')"
-                        class="flex-1 bg-green-600 hover:bg-green-700 text-black
- dark:text-white
- font-medium py-2 px-4 rounded transition-colors">
+                    style="flex:1;padding:10px 0;border-radius:10px;border:none;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-weight:600;font-size:0.9rem;cursor:pointer;transition:opacity 0.2s,transform 0.2s;"
+                    onmouseover="this.style.opacity='0.85';this.style.transform='scale(1.03)';"
+                    onmouseout="this.style.opacity='1';this.style.transform='scale(1)';">
                     ${translations[currentLanguage].contactNow}
                 </button>
             </div>
         </div>
     `;
-    
-    // Add staggered animation
+
+    // Image zoom on hover
+    const img = card.querySelector('img');
+    card.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.07)'; });
+    card.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; });
+
+    // Staggered fade-in
     setTimeout(() => {
-        card.classList.add('animate-slide-up');
-    }, index * 100);
-    
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+    }, 200 + index * 120);
+
     return card;
 }
 
