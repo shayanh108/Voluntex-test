@@ -565,7 +565,7 @@ function createOrganizationCard(org, index) {
  font-medium py-2 px-4 rounded transition-colors">
                     ${translations[currentLanguage].viewDetails}
                 </button>
-                <button onclick="contactOrganization('${org.email}')" 
+                <button onclick="contactOrganization('${org.name}', '${org.email}')"
                         class="flex-1 bg-green-600 hover:bg-green-700 text-black
  dark:text-white
  font-medium py-2 px-4 rounded transition-colors">
@@ -612,9 +612,9 @@ function viewOrganizationDetails(orgName) {
     window.location.href = 'charity-details.html';
 }
 
-function contactOrganization(email) {
-    // Open contact form with pre-filled organization email
-    window.location.href = `contact.html?org=${encodeURIComponent(email)}`;
+function contactOrganization(orgName, email) {
+    // Open contact form with pre-filled organization info, locked to Student Inquiry
+    window.location.href = `contact.html?from=charity&orgName=${encodeURIComponent(orgName)}&org=${encodeURIComponent(email)}`;
 }
 
 // About page functions
@@ -713,13 +713,28 @@ function initializeContactForm() {
       
     }
     
-    // Pre-fill form if coming from organization contact
+    // Pre-fill and lock form if coming from a charity's "Contact Now" button
     const urlParams = new URLSearchParams(window.location.search);
-    const orgEmail = urlParams.get('org');
-    if (orgEmail) {
+    const fromCharity = urlParams.get('from') === 'charity';
+    const orgName = urlParams.get('orgName');
+
+    if (fromCharity) {
         const subjectField = document.getElementById('inquiry_type');
         if (subjectField) {
-            subjectField.value = `Volunteer Opportunity - ${decodeURIComponent(orgEmail)}`;
+            subjectField.value = 'student-inquiry';
+            subjectField.disabled = true;
+            // Hidden input ensures the value is submitted even though the select is disabled
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = 'inquiry_type';
+            hidden.value = 'student-inquiry';
+            subjectField.parentNode.appendChild(hidden);
+        }
+        if (orgName) {
+            const messageField = document.getElementById('student_message');
+            if (messageField) {
+                messageField.placeholder = `I am interested in volunteering with ${decodeURIComponent(orgName)}. Please tell us how we can help you...`;
+            }
         }
     }
 }
