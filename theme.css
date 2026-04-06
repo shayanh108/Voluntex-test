@@ -1,0 +1,215 @@
+/* VoluntEx Theme — Modern Dark Design System */
+
+/* ============================================================
+   NAVIGATION — refined frosted glass
+   ============================================================ */
+html.dark nav {
+    background: rgba(10, 14, 28, 0.88) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.18) !important;
+    box-shadow: 0 1px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   HERO SECTIONS — consistent deep gradient in dark mode
+   (HTML class fix handles most, this is a fallback)
+   ============================================================ */
+html.dark section.pt-24 {
+    background: linear-gradient(135deg, #0f172a 0%, #1a1040 100%) !important;
+}
+
+/* ============================================================
+   SECTION BACKGROUNDS — seamless dark flow
+   ============================================================ */
+html.dark section.py-20.bg-white,
+html.dark section.py-16.bg-white {
+    background: #0f172a !important;
+}
+
+/* ============================================================
+   GRADIENT BUTTONS
+   ============================================================ */
+.bg-blue-600 {
+    background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+    border: none !important;
+    transition: box-shadow 0.25s ease, transform 0.2s ease !important;
+}
+.bg-blue-600:hover {
+    background: linear-gradient(135deg, #2563eb, #4f46e5) !important;
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.45) !important;
+}
+
+/* Step number circles */
+.bg-blue-600.rounded-full {
+    background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+    box-shadow: 0 4px 18px rgba(99, 102, 241, 0.5) !important;
+}
+
+/* ============================================================
+   GLASSMORPHISM CARDS — dark mode
+   ============================================================ */
+
+/* Named card classes */
+html.dark .team-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35) !important;
+    transition: all 0.3s ease !important;
+}
+html.dark .team-card:hover {
+    background: rgba(99, 102, 241, 0.08) !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+    box-shadow: 0 8px 36px rgba(99, 102, 241, 0.2) !important;
+    transform: translateY(-6px);
+}
+
+html.dark .faq-item {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    transition: all 0.3s ease !important;
+}
+html.dark .faq-item:hover {
+    background: rgba(99, 102, 241, 0.07) !important;
+    border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+html.dark .filter-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+}
+
+/* Mission / Vision / Values / Contact form cards (bg-white + rounded) */
+html.dark .bg-white.rounded-2xl,
+html.dark .bg-white.rounded-xl {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+html.dark .bg-white.rounded-2xl:hover,
+html.dark .bg-white.rounded-xl:hover {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border-color: rgba(99, 102, 241, 0.25) !important;
+}
+
+/* About / Featured org carousel cards (bg-gray-50 + rounded) */
+html.dark .bg-gray-50.rounded-2xl,
+html.dark .bg-gray-50.rounded-xl {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Featured org splide slides */
+html.dark .splide__slide .rounded-xl {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Contact info cards */
+html.dark .general-inquiries {
+    background: rgba(99, 102, 241, 0.1) !important;
+    border: 1px solid rgba(99, 102, 241, 0.22) !important;
+}
+html.dark .bg-green-50.rounded-2xl {
+    background: rgba(16, 185, 129, 0.07) !important;
+    border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+html.dark .partnership-card {
+    background: rgba(167, 139, 250, 0.08) !important;
+    border: 1px solid rgba(167, 139, 250, 0.2) !important;
+}
+
+/* ============================================================
+   STAT COUNTERS — gradient text in dark
+   ============================================================ */
+html.dark .stat-counter {
+    background: linear-gradient(135deg, #60a5fa, #a78bfa) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Stat icon circles */
+html.dark .bg-blue-100.rounded-full {
+    background: rgba(99, 102, 241, 0.14) !important;
+    border: 1px solid rgba(99, 102, 241, 0.28);
+}
+html.dark .bg-green-100.rounded-full {
+    background: rgba(16, 185, 129, 0.12) !important;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+html.dark .bg-purple-100.rounded-full {
+    background: rgba(167, 139, 250, 0.12) !important;
+    border: 1px solid rgba(167, 139, 250, 0.25);
+}
+html.dark .bg-orange-100.rounded-full {
+    background: rgba(251, 146, 60, 0.12) !important;
+    border: 1px solid rgba(251, 146, 60, 0.25);
+}
+
+/* ============================================================
+   FORM INPUTS — glass style in dark
+   ============================================================ */
+html.dark input,
+html.dark select,
+html.dark textarea {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    color: #f1f5f9 !important;
+}
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(99, 102, 241, 0.5) !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+    outline: none !important;
+}
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+    color: rgba(148, 163, 184, 0.6) !important;
+}
+
+/* ============================================================
+   QUICK FILTER PILLS — dark mode
+   ============================================================ */
+html.dark button[onclick^="quickFilter"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #cbd5e1 !important;
+    transition: all 0.2s ease !important;
+}
+html.dark button[onclick^="quickFilter"]:hover {
+    background: rgba(99, 102, 241, 0.18) !important;
+    border-color: rgba(99, 102, 241, 0.4) !important;
+    color: #fff !important;
+}
+
+/* ============================================================
+   CTA SECTION — vibrant gradient
+   ============================================================ */
+section.bg-blue-600,
+.bg-blue-600.dark\:bg-blue-800 {
+    background: linear-gradient(135deg, #1d4ed8 0%, #4338ca 100%) !important;
+}
+
+/* ============================================================
+   FOOTER — deep dark gradient
+   ============================================================ */
+footer {
+    background: linear-gradient(to bottom, #0c1120, #060c18) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   SCROLLBAR — refined
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0f1e; }
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #3b82f6, #6366f1);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2563eb, #4f46e5);
+}
