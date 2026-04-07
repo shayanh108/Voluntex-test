@@ -487,7 +487,7 @@ footer {
 }
 
 .vx-footer-logo {
-    height: 64px;
+    height: 48px;
     width: auto;
     margin: 0 auto 1.5rem;
     display: block;
@@ -514,7 +514,7 @@ footer {
 
 .vx-footer-copy {
     font-size: 0.8rem;
-    color: #475569;
+    color: #ffffff;
 }
 
 /* Light mode footer */
@@ -524,4 +524,4 @@ html:not(.dark) .vx-footer {
     color: #475569;
 }
 html:not(.dark) .vx-footer-tagline { color: #64748b; }
-html:not(.dark) .vx-footer-copy    { color: #94a3b8; }
+html:not(.dark) .vx-footer-copy    { color: #1e293b; }
