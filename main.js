@@ -787,6 +787,18 @@ function initializeContactForm() {
       
     }
     
+    // Pre-fill grade from the home page matching form if saved
+    const savedStudentData = sessionStorage.getItem('studentData');
+    if (savedStudentData) {
+        const studentData = JSON.parse(savedStudentData);
+        if (studentData.grade) {
+            const gradeField = document.getElementById('studentGrade');
+            if (gradeField) {
+                gradeField.value = studentData.grade;
+            }
+        }
+    }
+
     // Pre-fill and lock form if coming from a charity's "Contact Now" button
     const urlParams = new URLSearchParams(window.location.search);
     const fromCharity = urlParams.get('from') === 'charity';
