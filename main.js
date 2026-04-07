@@ -569,7 +569,7 @@ function createOrganizationCard(org, index) {
         </div>
         <div style="padding:1.5rem;display:flex;flex-direction:column;flex:1;gap:0.75rem;">
             <h3 style="font-size:1.2rem;font-weight:700;color:#fff;margin:0;">${org.name}</h3>
-            <p style="color:#94a3b8;font-size:0.92rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">${org.description}</p>
+            <p style="color:#ffffff;font-size:0.92rem;line-height:1.55;margin:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">${org.description}</p>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:0.5rem;">
                 <span style="background:rgba(255,255,255,0.07);color:#e2e8f0;font-size:1.05rem;font-weight:700;padding:6px 14px;border-radius:6px;display:flex;align-items:center;gap:7px;">
                     <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
