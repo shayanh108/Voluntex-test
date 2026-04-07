@@ -487,19 +487,15 @@ footer {
 }
 
 .vx-footer-logo {
-    height: 48px;
-    width: auto;
-    margin: 0 auto 1.5rem;
-    display: block;
+    height: 72px !important;
+    width: auto !important;
+    margin: 0 auto 1.5rem !important;
+    display: block !important;
     filter: brightness(1.1);
 }
 
 .vx-footer-divider {
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, #3b82f6, #6366f1);
-    border-radius: 99px;
-    margin: 0 auto 1.5rem;
+    display: none;
 }
 
 .vx-footer-tagline {
