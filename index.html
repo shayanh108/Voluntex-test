@@ -444,65 +444,201 @@
     </section>
 
     <!-- Featured Organizations Section -->
-    <section class="py-20 bg-white dark:bg-slate-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-black
- 
- dark:text-white
- mb-4">
-                    Featured Organizations
-                </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-300">
-                    Some of our amazing partner organizations making a difference
-                </p>
+    <section class="vx-carousel-section">
+        <style>
+            /* Section wrapper */
+            .vx-carousel-section {
+                padding: 5rem 0;
+                background: #f0f4ff;
+                position: relative;
+                overflow: hidden;
+            }
+            html.dark .vx-carousel-section {
+                background: linear-gradient(180deg, #0a0f1e 0%, #0f172a 100%);
+            }
+
+            /* Fade edges */
+            .vx-carousel-section::before,
+            .vx-carousel-section::after {
+                content: '';
+                position: absolute;
+                top: 0; bottom: 0;
+                width: 120px;
+                z-index: 10;
+                pointer-events: none;
+            }
+            .vx-carousel-section::before {
+                left: 0;
+                background: linear-gradient(to right, #f0f4ff, transparent);
+            }
+            .vx-carousel-section::after {
+                right: 0;
+                background: linear-gradient(to left, #f0f4ff, transparent);
+            }
+            html.dark .vx-carousel-section::before {
+                background: linear-gradient(to right, #0a0f1e, transparent);
+            }
+            html.dark .vx-carousel-section::after {
+                background: linear-gradient(to left, #0a0f1e, transparent);
+            }
+
+            /* Header */
+            .vx-carousel-header {
+                text-align: center;
+                margin-bottom: 3rem;
+                position: relative;
+                z-index: 2;
+            }
+            .vx-carousel-header h2 {
+                font-size: clamp(2rem, 4vw, 2.8rem);
+                font-weight: 800;
+                color: #0f172a;
+                letter-spacing: -0.02em;
+                margin-bottom: 0.5rem;
+            }
+            html.dark .vx-carousel-header h2 {
+                color: #f1f5f9;
+            }
+            .vx-carousel-header p {
+                color: #64748b;
+                font-size: 1.05rem;
+            }
+            html.dark .vx-carousel-header p {
+                color: #94a3b8;
+            }
+
+            /* Cards */
+            .vx-org-card {
+                border-radius: 1.25rem;
+                overflow: hidden;
+                position: relative;
+                height: 380px;
+                cursor: pointer;
+                box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+                transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), box-shadow 0.4s ease;
+            }
+            .vx-org-card:hover {
+                transform: translateY(-8px) scale(1.02);
+                box-shadow: 0 20px 50px rgba(0,0,0,0.22);
+            }
+            .vx-org-card img {
+                width: 100%; height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+            .vx-org-card:hover img {
+                transform: scale(1.07);
+            }
+            /* Gradient overlay */
+            .vx-org-card-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(5,7,20,0.92) 0%, rgba(5,7,20,0.35) 55%, transparent 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 1.75rem;
+            }
+            .vx-org-card-badge {
+                display: inline-block;
+                padding: 3px 12px;
+                border-radius: 999px;
+                font-size: 0.72rem;
+                font-weight: 700;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                margin-bottom: 0.6rem;
+                width: fit-content;
+            }
+            .vx-org-card h3 {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 0.3rem;
+                line-height: 1.3;
+            }
+            .vx-org-card p {
+                font-size: 0.88rem;
+                color: rgba(255,255,255,0.72);
+                line-height: 1.5;
+            }
+
+            /* Custom Splide arrows */
+            #featuredOrganizations .splide__arrow {
+                background: rgba(255,255,255,0.12);
+                border: 1px solid rgba(255,255,255,0.2);
+                backdrop-filter: blur(8px);
+                width: 44px; height: 44px;
+                border-radius: 50%;
+                transition: background 0.2s, transform 0.2s;
+            }
+            #featuredOrganizations .splide__arrow:hover {
+                background: rgba(99,102,241,0.5);
+                transform: scale(1.1);
+            }
+            #featuredOrganizations .splide__arrow svg {
+                fill: #fff;
+            }
+
+            /* Splide pagination dots */
+            #featuredOrganizations .splide__pagination__page {
+                background: rgba(255,255,255,0.3);
+                width: 8px; height: 8px;
+                transition: background 0.25s, transform 0.25s;
+            }
+            #featuredOrganizations .splide__pagination__page.is-active {
+                background: #6366f1;
+                transform: scale(1.4);
+            }
+        </style>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style="position:relative;z-index:2;">
+            <div class="vx-carousel-header">
+                <h2>Featured Organizations</h2>
+                <p>Some of our amazing partner organizations making a difference</p>
             </div>
-            
+
             <div class="splide" id="featuredOrganizations">
                 <div class="splide__track">
                     <ul class="splide__list">
                         <li class="splide__slide">
-                            <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 text-center">
-                                <img src="images/york-region-food-bank.jpg" alt="Food Bank of York Region" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-semibold text-black
- 
- dark:text-white
- mb-2">Food Bank of York Region</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">Fighting food insecurity across York Region</p>
-                                <span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-3 py-1 rounded-full text-sm font-medium">Food Security</span>
+                            <div class="vx-org-card">
+                                <img src="images/york-region-food-bank.jpg" alt="Food Bank of York Region">
+                                <div class="vx-org-card-overlay">
+                                    <span class="vx-org-card-badge" style="background:rgba(16,185,129,0.25);color:#6ee7b7;border:1px solid rgba(16,185,129,0.4);">Food Security</span>
+                                    <h3>Food Bank of York Region</h3>
+                                    <p>Fighting food insecurity across York Region</p>
+                                </div>
                             </div>
                         </li>
                         <li class="splide__slide">
-                            <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 text-center">
-                                <img src="images/ontario-spca.jpeg" alt="Ontario SPCA" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-semibold text-black
- 
- dark:text-white
- mb-2">Ontario SPCA</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">Caring for animals in need</p>
-                                <span class="bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 px-3 py-1 rounded-full text-sm font-medium">Animal Welfare</span>
+                            <div class="vx-org-card">
+                                <img src="images/ontario-spca.jpeg" alt="Ontario SPCA">
+                                <div class="vx-org-card-overlay">
+                                    <span class="vx-org-card-badge" style="background:rgba(251,146,60,0.25);color:#fcd34d;border:1px solid rgba(251,146,60,0.4);">Animal Welfare</span>
+                                    <h3>Ontario SPCA</h3>
+                                    <p>Caring for animals in need</p>
+                                </div>
                             </div>
                         </li>
                         <li class="splide__slide">
-                            <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 text-center">
-                                <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/bf0db8737e4ede91184d781d9376aa9f0cd2a75e.png" alt="CMHA" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-semibold text-black
- 
- dark:text-white
- mb-2">CMHA York Region</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">Supporting mental health and wellness</p>
-                                <span class="bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 px-3 py-1 rounded-full text-sm font-medium">Mental Health</span>
+                            <div class="vx-org-card">
+                                <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/bf0db8737e4ede91184d781d9376aa9f0cd2a75e.png" alt="CMHA">
+                                <div class="vx-org-card-overlay">
+                                    <span class="vx-org-card-badge" style="background:rgba(167,139,250,0.25);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);">Mental Health</span>
+                                    <h3>CMHA York Region</h3>
+                                    <p>Supporting mental health and wellness</p>
+                                </div>
                             </div>
                         </li>
                         <li class="splide__slide">
-                            <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-6 text-center">
-                                <img src="https://kimi-web-img.moonshot.cn/img/discoveryvillages.com/3a3194fef234b60854544bc9b6d9cff89814b6bd.jpg" alt="CHATS" class="w-full h-48 object-cover rounded-lg mb-4">
-                                <h3 class="text-xl font-semibold text-black
- 
- dark:text-white
- mb-2">CHATS</h3>
-                                <p class="text-gray-600 dark:text-gray-300 mb-4">Supporting seniors in our community</p>
-                                <span class="bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 px-3 py-1 rounded-full text-sm font-medium">Senior Support</span>
+                            <div class="vx-org-card">
+                                <img src="https://kimi-web-img.moonshot.cn/img/discoveryvillages.com/3a3194fef234b60854544bc9b6d9cff89814b6bd.jpg" alt="CHATS">
+                                <div class="vx-org-card-overlay">
+                                    <span class="vx-org-card-badge" style="background:rgba(20,184,166,0.25);color:#99f6e4;border:1px solid rgba(20,184,166,0.4);">Senior Support</span>
+                                    <h3>CHATS</h3>
+                                    <p>Supporting seniors in our community</p>
+                                </div>
                             </div>
                         </li>
                     </ul>
