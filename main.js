@@ -807,7 +807,39 @@ function initializeContactForm() {
         if (orgName) {
             const messageField = document.getElementById('student_message');
             if (messageField) {
-                messageField.placeholder = `I am interested in volunteering with ${decodeURIComponent(orgName)}. Please tell us how we can help you...`;
+                const prefix = `I am interested in volunteering with ${decodeURIComponent(orgName)}. `;
+                messageField.value = prefix;
+                messageField.placeholder = '';
+
+                // Move cursor to end on load
+                setTimeout(() => messageField.setSelectionRange(prefix.length, prefix.length), 50);
+
+                // Restore prefix if user deletes into it (e.g. select-all + delete)
+                messageField.addEventListener('input', function() {
+                    if (!this.value.startsWith(prefix)) {
+                        this.value = prefix;
+                        this.setSelectionRange(prefix.length, prefix.length);
+                    }
+                });
+
+                // Block backspace/delete at the prefix boundary
+                messageField.addEventListener('keydown', function(e) {
+                    const s = this.selectionStart;
+                    const e2 = this.selectionEnd;
+                    if (e.key === 'Backspace' && s <= prefix.length && e2 <= prefix.length) {
+                        e.preventDefault();
+                    }
+                    if (e.key === 'Delete' && s < prefix.length && e2 <= prefix.length) {
+                        e.preventDefault();
+                    }
+                });
+
+                // Stop cursor being placed inside the prefix
+                messageField.addEventListener('click', function() {
+                    if (this.selectionStart < prefix.length) {
+                        this.setSelectionRange(prefix.length, prefix.length);
+                    }
+                });
             }
         }
     }
