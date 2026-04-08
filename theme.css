@@ -478,6 +478,16 @@ footer {
 }
 
 /* ============================================================
+   GET STARTED BUTTON — text colour per mode
+   ============================================================ */
+#startMatching {
+    color: #ffffff !important; /* light mode */
+}
+html.dark #startMatching {
+    color: #000000 !important; /* dark mode */
+}
+
+/* ============================================================
    CHARITIES PAGE — HERO
    ============================================================ */
 .vx-charities-hero {
