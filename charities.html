@@ -169,13 +169,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-4xl md:text-6xl font-bold text-black
- 
+
  dark:text-white
- mb-6">
+ mb-6" data-translate="charitiesHeroTitle">
                     Find Your Perfect Match
                 </h1>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                    Discover amazing non-profit organizations in York Region that align with your passions and interests. 
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-translate="charitiesHeroSubtitle">
+                    Discover amazing non-profit organizations in York Region that align with your passions and interests.
                     Each organization offers unique opportunities to make a real difference in your community.
                 </p>
             </div>
@@ -189,7 +189,7 @@
                 <div class="grid md:grid-cols-4 gap-4">
                     <!-- Search Input -->
                     <div class="md:col-span-2">
-                        <label for="searchInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Search Organizations</label>
+                        <label for="searchInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="searchOrganizations">Search Organizations</label>
                         <div class="relative">
                             <input type="text" id="searchInput" placeholder="Search by name or description..." 
                                    class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
@@ -201,11 +201,11 @@
                     
                     <!-- Cause Area Filter -->
                     <div>
-                        <label for="causeFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Cause Area</label>
+                        <label for="causeFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="causeArea">Cause Area</label>
                         <select id="causeFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
  transition-all">
-                            <option value="">All Causes</option>
+                            <option value="" data-translate="allCauses">All Causes</option>
                             <option value="Youth Services">Youth Services</option>
                             <option value="Youth Mentorship">Youth Mentorship</option>
                             <option value="Food Security">Food Security</option>
@@ -220,11 +220,11 @@
                     
                     <!-- Location Filter -->
                     <div>
-                        <label for="locationFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Location</label>
+                        <label for="locationFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="locationLabel">Location</label>
                         <select id="locationFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
  transition-all">
-                            <option value="">All Locations</option>
+                            <option value="" data-translate="allLocations">All Locations</option>
                             <option value="Richmond Hill">Richmond Hill</option>
                             <option value="Markham">Markham</option>
                             <option value="Vaughan">Vaughan</option>
@@ -238,17 +238,17 @@
                 </div>
                 
                 <div class="flex flex-wrap gap-2 mt-4 items-center">
-                    <span class="text-sm text-gray-600 dark:text-gray-300">Quick filters:</span>
-                    <button data-cause="Food Security" onclick="quickFilter('Food Security', this)" class="quick-filter-btn px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-white rounded-full text-sm">
+                    <span class="text-sm text-gray-600 dark:text-gray-300" data-translate="quickFilters">Quick filters:</span>
+                    <button data-cause="Food Security" onclick="quickFilter('Food Security', this)" class="quick-filter-btn px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-white rounded-full text-sm" data-translate="foodSecurity">
                         Food Security
                     </button>
-                    <button data-cause="Animal Welfare" onclick="quickFilter('Animal Welfare', this)" class="quick-filter-btn px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-white rounded-full text-sm">
+                    <button data-cause="Animal Welfare" onclick="quickFilter('Animal Welfare', this)" class="quick-filter-btn px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-white rounded-full text-sm" data-translate="animalWelfare">
                         Animal Welfare
                     </button>
-                    <button data-cause="Youth Services" onclick="quickFilter('Youth Services', this)" class="quick-filter-btn px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-white rounded-full text-sm">
+                    <button data-cause="Youth Services" onclick="quickFilter('Youth Services', this)" class="quick-filter-btn px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-white rounded-full text-sm" data-translate="youthServices">
                         Youth Services
                     </button>
-                    <button data-cause="Mental Health" onclick="quickFilter('Mental Health', this)" class="quick-filter-btn px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-white rounded-full text-sm">
+                    <button data-cause="Mental Health" onclick="quickFilter('Mental Health', this)" class="quick-filter-btn px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-white rounded-full text-sm" data-translate="mentalHealth">
                         Mental Health
                     </button>
                 </div>
@@ -263,14 +263,14 @@
             <!-- Results Header -->
             <div class="flex justify-between items-center mb-8 vx-results-header">
                 <div>
-                    <h2 class="vx-results-title">Organizations</h2>
-                    <p class="vx-results-count" id="resultsCount">Showing all organizations</p>
+                    <h2 class="vx-results-title" data-translate="organizationsTitle">Organizations</h2>
+                    <p class="vx-results-count" id="resultsCount" data-translate="showingAllOrgs">Showing all organizations</p>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <span class="text-sm text-gray-500 dark:text-gray-400">Sort by:</span>
+                    <span class="text-sm text-gray-500 dark:text-gray-400" data-translate="sortByLabel">Sort by:</span>
                     <select id="sortBy" class="vx-sort-select px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white text-sm">
-                        <option value="name">Name (A-Z)</option>
-                        <option value="location">Location</option>
+                        <option value="name" data-translate="sortNameAZ">Name (A-Z)</option>
+                        <option value="location" data-translate="sortLocation">Location</option>
                     </select>
                 </div>
             </div>
@@ -284,7 +284,7 @@
             <div class="text-center mt-12">
                 <button id="loadMoreBtn" class="bg-blue-600 hover:bg-blue-700 text-black
  dark:text-white
- font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105" style="display: none;">
+ font-semibold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105" style="display: none;" data-translate="loadMoreOrgs">
                     Load More Organizations
                 </button>
             </div>
@@ -294,21 +294,19 @@
     <!-- Add Your Organization CTA -->
     <section class="py-16 bg-blue-600 dark:bg-blue-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold mb-4" style="color: #ffffff !important;">
+        <h2 class="text-3xl font-bold mb-4" style="color: #ffffff !important;" data-translate="nonprofitCTA">
     Are you a non-profit organization?
 </h2>
-
-
-            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto" data-translate="nonprofitCTADesc">
                 Join our network of organizations and connect with passionate, dedicated student volunteers who want to make a real difference.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="contact.html" class="bg-white text-gray-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors">
+                <a href="contact.html" class="bg-white text-gray-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors" data-translate="addYourOrg">
                     Add Your Organization
                 </a>
                 <a href="about.html" class="border-2 border-white text-black
  dark:text-white
- font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-gray-600 transition-colors">
+ font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-gray-600 transition-colors" data-translate="learnMoreAboutUs">
                     Learn More About Us
                 </a>
             </div>
@@ -320,8 +318,8 @@
         <div class="max-w-4xl mx-auto px-6 py-12 vx-footer-inner">
             <img src="images/no-background-logo.png" alt="VoluntEx Logo" class="vx-footer-logo">
             <div class="vx-footer-text">
-                <p class="vx-footer-tagline">Connecting students with meaningful volunteer opportunities across York Region, Ontario</p>
-                <p class="vx-footer-copy">© 2024 VoluntEx. All rights reserved. | Empowering the next generation of volunteers.</p>
+                <p class="vx-footer-tagline" data-translate="footerTagline">Connecting students with meaningful volunteer opportunities across York Region, Ontario</p>
+                <p class="vx-footer-copy" data-translate="footerCopy">© 2024 VoluntEx. All rights reserved. | Empowering the next generation of volunteers.</p>
             </div>
         </div>
     </footer>

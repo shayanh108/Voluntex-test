@@ -154,13 +154,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h1 class="text-4xl md:text-6xl font-bold text-black
- 
+
  dark:text-white
- mb-6">
+ mb-6" data-translate="contactHeroTitle">
                     Get In Touch
                 </h1>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                    We're here to help students, parents, educators, and organizations connect for meaningful volunteer opportunities. 
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto" data-translate="contactHeroSubtitle">
+                    We're here to help students, parents, educators, and organizations connect for meaningful volunteer opportunities.
                     Reach out with any questions, suggestions, or partnership inquiries.
                 </p>
             </div>
@@ -176,9 +176,9 @@
                 <div class="lg:col-span-2 vx-reveal">
                     <div class="vx-contact-form-card">
                         <h2 class="text-2xl font-bold text-black
- 
+
  dark:text-white
- mb-6">Send us a message</h2>
+ mb-6" data-translate="sendUsMessage">Send us a message</h2>
                         
                         <form
   id="contactForm"
@@ -197,14 +197,14 @@
 
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div>
-                                    <label for="student_first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">First Name</label>
+                                    <label for="student_first_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="firstName">First Name</label>
                                     <input type="text" id="student_first_name" name="student_first_name" required 
                                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
  transition-all">
                                 </div>
                                 <div>
-                                    <label for="student_last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Last Name</label>
+                                    <label for="student_last_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="lastName">Last Name</label>
                                     <input type="text" id="student_last_name" name="student_last_name" required 
                                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
@@ -213,7 +213,7 @@
                             </div>
                             
                             <div>
-                                <label for="student_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">E-Mail Address</label>
+                                <label for="student_email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="emailAddress">E-Mail Address</label>
                                 <input type="email" id="student_email" name="student_email" required 
                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
@@ -239,7 +239,7 @@
     </select>
   </div>
                                 <div>
-    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number</label>
+    <label for="phone" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="phoneNumber">Phone Number</label>
     <input
       type="tel"
       id="phone"
@@ -249,16 +249,16 @@
       placeholder="e.g., +1 (437) 973-9770"
       class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white transition-all"
     />
-    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">Optional, but helps charities contact you faster.</p>
+    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400" data-translate="phoneOptional">Optional, but helps charities contact you faster.</p>
   </div>
 </div>
                             <div>
-                                <label for="inquiry_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Subject</label>
+                                <label for="inquiry_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="subjectLabel">Subject</label>
                                 <select id="inquiry_type" name="inquiry_type" required 
                                         class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
  transition-all">
-                                    <option value="">Select a topic</option>
+                                    <option value="" data-translate="selectTopic">Select a topic</option>
                                     <option value="student-inquiry">Student Inquiry</option>
                                     <option value="parent-inquiry">Parent Inquiry</option>
                                     <option value="organization-partnership">Organization Partnership</option>
@@ -269,17 +269,17 @@
                             </div>
                             
                             <div>
-                                <label for="student_message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <label for="student_message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="messageLabel">Message</label>
                                 <textarea id="student_message" name="student_message" rows="6" required 
                                           class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
  transition-all resize-none"
-                                          placeholder="Tell us how we can help you..."></textarea>
+                                          placeholder="Tell us how we can help you..." data-translate-placeholder="messagePlaceholder"></textarea>
                             </div>
                             
                             <div class="flex items-start">
                                 <input type="checkbox" id="newsletter_opt_in" name="newsletter_opt_in" class="mt-1 mr-3 h-4 w-4 text-gray-600 focus:ring-blue-500 border-gray-300 rounded">
-                                <label for="newsletter_opt_in" class="text-sm text-gray-600 dark:text-gray-300">
+                                <label for="newsletter_opt_in" class="text-sm text-gray-600 dark:text-gray-300" data-translate="newsletterOptIn">
                                     I'd like to receive updates about new volunteer opportunities and VoluntEx news.
                                 </label>
                             </div>
@@ -288,7 +288,7 @@
                             
                             <button type="submit" class="vx-send-btn">
                                 <i class="fa-solid fa-paper-plane"></i>
-                                Send Message
+                                <span data-translate="sendMessage">Send Message</span>
                             </button>
                         </form>
                     </div>
@@ -302,7 +302,7 @@
                         <div class="vx-info-card-icon" style="background:rgba(59,130,246,0.15);">
                             <i class="fa-solid fa-envelope" style="color:#3b82f6;"></i>
                         </div>
-                        <h3>General Inquiries</h3>
+                        <h3 data-translate="generalInquiries">General Inquiries</h3>
                         <div class="space-y-2">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-envelope text-xs" style="color:#3b82f6;"></i>
@@ -320,7 +320,7 @@
                         <div class="vx-info-card-icon" style="background:rgba(16,185,129,0.15);">
                             <i class="fa-solid fa-graduation-cap" style="color:#10b981;"></i>
                         </div>
-                        <h3>Student Support</h3>
+                        <h3 data-translate="studentSupportLabel">Student Support</h3>
                         <div class="space-y-2">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-envelope text-xs" style="color:#10b981;"></i>
@@ -328,7 +328,7 @@
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-clock text-xs" style="color:#10b981;"></i>
-                                <span class="detail">Response within 24 hours</span>
+                                <span class="detail" data-translate="responseWithin24">Response within 24 hours</span>
                             </div>
                         </div>
                     </div>
@@ -338,7 +338,7 @@
                         <div class="vx-info-card-icon" style="background:rgba(168,85,247,0.15);">
                             <i class="fa-solid fa-handshake" style="color:#a855f7;"></i>
                         </div>
-                        <h3>Organization Partnerships</h3>
+                        <h3 data-translate="orgPartnerships">Organization Partnerships</h3>
                         <div class="space-y-2">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-envelope text-xs" style="color:#a855f7;"></i>
@@ -346,7 +346,7 @@
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-building text-xs" style="color:#a855f7;"></i>
-                                <span class="detail">Join our network of 25+ organizations</span>
+                                <span class="detail" data-translate="joinNetwork">Join our network of 25+ organizations</span>
                             </div>
                         </div>
                     </div>
@@ -356,12 +356,12 @@
                         <div class="vx-info-card-icon" style="background:rgba(245,158,11,0.15);">
                             <i class="fa-solid fa-clock" style="color:#f59e0b;"></i>
                         </div>
-                        <h3>Response Times</h3>
+                        <h3 data-translate="responseTimes">Response Times</h3>
                         <ul class="space-y-1">
-                            <li class="detail text-sm">• General inquiries: Within 24 hours</li>
-                            <li class="detail text-sm">• Student support: Within 12 hours</li>
-                            <li class="detail text-sm">• Technical issues: Within 6 hours</li>
-                            <li class="detail text-sm">• Partnership requests: Within 48 hours</li>
+                            <li class="detail text-sm" data-translate="responseTimeGeneral">• General inquiries: Within 24 hours</li>
+                            <li class="detail text-sm" data-translate="responseTimeStudent">• Student support: Within 12 hours</li>
+                            <li class="detail text-sm" data-translate="responseTimeTechnical">• Technical issues: Within 6 hours</li>
+                            <li class="detail text-sm" data-translate="responseTimePartnership">• Partnership requests: Within 48 hours</li>
                         </ul>
                     </div>
 
@@ -375,12 +375,12 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-black
- 
+
  dark:text-white
- mb-4">
+ mb-4" data-translate="faqTitle">
                     Frequently Asked Questions
                 </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-300">
+                <p class="text-lg text-gray-600 dark:text-gray-300" data-translate="faqSubtitle">
                     Quick answers to common questions about volunteering through VoluntEx
                 </p>
             </div>
@@ -389,78 +389,78 @@
                 <div class="faq-item bg-white dark:bg-slate-700 rounded-2xl p-6 cursor-pointer">
                     <div class="faq-question flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-black
- 
+
  dark:text-white
-">How do I start finding volunteer opportunities?</h3>
+" data-translate="faq1Q">How do I start finding volunteer opportunities?</h3>
                         <i class="faq-icon fa-solid fa-chevron-down text-gray-600 transition-transform"></i>
                     </div>
                     <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300">
-                        <p>Getting started is easy! Click the "Get Started" button on our homepage and fill out our simple matching form. Tell us about your interests, grade level, and what causes you're passionate about. We'll then show you organizations that align with your preferences.</p>
+                        <p data-translate="faq1A">Getting started is easy! Click the "Get Started" button on our homepage and fill out our simple matching form. Tell us about your interests, grade level, and what causes you're passionate about. We'll then show you organizations that align with your preferences.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item bg-white dark:bg-slate-700 rounded-2xl p-6 cursor-pointer">
                     <div class="faq-question flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-black
- 
+
  dark:text-white
-">Is VoluntEx free to use?</h3>
+" data-translate="faq2Q">Is VoluntEx free to use?</h3>
                         <i class="faq-icon fa-solid fa-chevron-down text-gray-600 transition-transform"></i>
                     </div>
                     <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300">
-                        <p>Yes! VoluntEx is completely free for students and volunteers. We believe that finding meaningful volunteer opportunities should never come with a cost barrier. Our mission is to connect students with organizations that need their help.</p>
+                        <p data-translate="faq2A">Yes! VoluntEx is completely free for students and volunteers. We believe that finding meaningful volunteer opportunities should never come with a cost barrier. Our mission is to connect students with organizations that need their help.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item bg-white dark:bg-slate-700 rounded-2xl p-6 cursor-pointer">
                     <div class="faq-question flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-black
- 
+
  dark:text-white
-">What if I don't see any organizations in my area?</h3>
+" data-translate="faq3Q">What if I don't see any organizations in my area?</h3>
                         <i class="faq-icon fa-solid fa-chevron-down text-gray-600 transition-transform"></i>
                     </div>
                     <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300">
-                        <p>We're constantly expanding our network of partner organizations. If you don't see opportunities in your specific area of York Region, contact us at students@voluntex.org. We may know of additional opportunities or can help you find organizations that aren't yet in our system.</p>
+                        <p data-translate="faq3A">We're constantly expanding our network of partner organizations. If you don't see opportunities in your specific area of York Region, contact us at students@voluntex.org. We may know of additional opportunities or can help you find organizations that aren't yet in our system.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item bg-white dark:bg-slate-700 rounded-2xl p-6 cursor-pointer">
                     <div class="faq-question flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-black
- 
+
  dark:text-white
-">Can I volunteer if I'm not in high school yet?</h3>
+" data-translate="faq4Q">Can I volunteer if I'm not in high school yet?</h3>
                         <i class="faq-icon fa-solid fa-chevron-down text-gray-600 transition-transform"></i>
                     </div>
                     <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300">
-                        <p>Absolutely! While our platform is designed with Ontario's 40-hour graduation requirement in mind, we welcome students of all ages who want to make a difference. Many organizations have opportunities for middle school students and even younger volunteers with parental supervision.</p>
+                        <p data-translate="faq4A">Absolutely! While our platform is designed with Ontario's 40-hour graduation requirement in mind, we welcome students of all ages who want to make a difference. Many organizations have opportunities for middle school students and even younger volunteers with parental supervision.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item bg-white dark:bg-slate-700 rounded-2xl p-6 cursor-pointer">
                     <div class="faq-question flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-black
- 
+
  dark:text-white
-">How do I track my volunteer hours?</h3>
+" data-translate="faq5Q">How do I track my volunteer hours?</h3>
                         <i class="faq-icon fa-solid fa-chevron-down text-gray-600 transition-transform"></i>
                     </div>
                     <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300">
-                        <p>Each organization you volunteer with will provide you with documentation of your hours. We also recommend keeping your own log. Many schools provide volunteer hour tracking sheets, or you can create your own simple spreadsheet. Make sure to get signatures from supervisors at the organizations where you volunteer.</p>
+                        <p data-translate="faq5A">Each organization you volunteer with will provide you with documentation of your hours. We also recommend keeping your own log. Many schools provide volunteer hour tracking sheets, or you can create your own simple spreadsheet. Make sure to get signatures from supervisors at the organizations where you volunteer.</p>
                     </div>
                 </div>
                 
                 <div class="faq-item bg-white dark:bg-slate-700 rounded-2xl p-6 cursor-pointer">
                     <div class="faq-question flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-black
- 
+
  dark:text-white
-">What if I want to volunteer with multiple organizations?</h3>
+" data-translate="faq6Q">What if I want to volunteer with multiple organizations?</h3>
                         <i class="faq-icon fa-solid fa-chevron-down text-gray-600 transition-transform"></i>
                     </div>
                     <div class="faq-answer mt-4 text-gray-600 dark:text-gray-300">
-                        <p>That's wonderful! We encourage exploring different causes and organizations. You can absolutely volunteer with multiple organizations simultaneously or try different ones to find what resonates most with you. Each experience contributes to your growth and community impact.</p>
+                        <p data-translate="faq6A">That's wonderful! We encourage exploring different causes and organizations. You can absolutely volunteer with multiple organizations simultaneously or try different ones to find what resonates most with you. Each experience contributes to your growth and community impact.</p>
                     </div>
                 </div>
             </div>
@@ -472,12 +472,12 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-black
- 
+
  dark:text-white
- mb-4">
+ mb-4" data-translate="hoursTrackerTitle">
                     Volunteer Hours Tracker
                 </h2>
-                <p class="text-lg text-gray-600 dark:text-gray-300">
+                <p class="text-lg text-gray-600 dark:text-gray-300" data-translate="hoursTrackerSubtitle">
                     Keep track of your progress toward the 40-hour graduation requirement
                 </p>
             </div>
@@ -486,12 +486,12 @@
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
                         <h3 class="text-xl font-semibold text-black
- 
+
  dark:text-white
- mb-4">Track Your Progress</h3>
+ mb-4" data-translate="trackYourProgress">Track Your Progress</h3>
                         <div class="space-y-4">
                             <div>
-                                <label for="currentHours" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Current Hours Completed</label>
+                                <label for="currentHours" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="currentHoursLabel">Current Hours Completed</label>
                                 <input type="number" id="currentHours" min="0" max="40" value="0" 
                                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
  dark:text-white
@@ -499,7 +499,7 @@
                             </div>
                             <div class="text-center">
                                 <div class="text-3xl font-bold text-gray-600 dark:text-blue-400 mb-2" id="hoursRemaining">40</div>
-                                <p class="text-gray-600 dark:text-gray-300">hours remaining</p>
+                                <p class="text-gray-600 dark:text-gray-300" data-translate="hoursRemainingLabel">hours remaining</p>
                             </div>
                         </div>
                     </div>
@@ -536,7 +536,7 @@
  
  dark:text-white
 " id="percentageComplete">0%</div>
-                                    <div class="text-sm text-gray-600 dark:text-gray-300">Complete</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-300" data-translate="completeLabel">Complete</div>
                                 </div>
                             </div>
                         </div>
@@ -551,13 +551,12 @@
                 </div>
                 
                <div class="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                   <h4 class="pro-tips-heading font-semibold mb-2"> 
-💡 Pro Tips:</h4>
+                   <h4 class="pro-tips-heading font-semibold mb-2" data-translate="proTips">💡 Pro Tips:</h4>
                     <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
-                        <li>• Aim to complete your hours gradually rather than all at once</li>
-                        <li>• Try different types of volunteer work to discover your passions</li>
-                        <li>• Keep detailed records with supervisor signatures</li>
-                        <li>• Consider continuing to volunteer even after meeting the requirement</li>
+                        <li data-translate="proTip1">• Aim to complete your hours gradually rather than all at once</li>
+                        <li data-translate="proTip2">• Try different types of volunteer work to discover your passions</li>
+                        <li data-translate="proTip3">• Keep detailed records with supervisor signatures</li>
+                        <li data-translate="proTip4">• Consider continuing to volunteer even after meeting the requirement</li>
                     </ul>
                 </div>
             </div>
@@ -569,8 +568,8 @@
         <div class="max-w-4xl mx-auto px-6 py-12 vx-footer-inner">
             <img src="images/no-background-logo.png" alt="VoluntEx Logo" class="vx-footer-logo">
             <div class="vx-footer-text">
-                <p class="vx-footer-tagline">Connecting students with meaningful volunteer opportunities across York Region, Ontario</p>
-                <p class="vx-footer-copy">© 2024 VoluntEx. All rights reserved. | Empowering the next generation of volunteers.</p>
+                <p class="vx-footer-tagline" data-translate="footerTagline">Connecting students with meaningful volunteer opportunities across York Region, Ontario</p>
+                <p class="vx-footer-copy" data-translate="footerCopy">© 2024 VoluntEx. All rights reserved. | Empowering the next generation of volunteers.</p>
             </div>
         </div>
     </footer>
@@ -605,18 +604,17 @@
     const offset = circumference - (percentage / 100) * circumference;
     progressCircle.style.strokeDashoffset = offset;
 
+    const t = (window.translations && window.currentLanguage) ? window.translations[window.currentLanguage] : null;
     if (currentHours >= totalHours) {
-      graduationStatusSpan.textContent =
-        "🎉 Congratulations! You've met the graduation requirement!";
+      graduationStatusSpan.textContent = t ? t.graduationComplete : "🎉 Congratulations! You've met the graduation requirement!";
       graduationStatusSpan.parentElement.className =
         'inline-flex items-center px-4 py-2 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-lg';
     } else if (currentHours >= 30) {
-      graduationStatusSpan.textContent = "Great progress! You're almost there!";
+      graduationStatusSpan.textContent = t ? t.graduationAlmostThere : "Great progress! You're almost there!";
       graduationStatusSpan.parentElement.className =
         'inline-flex items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded-lg';
     } else {
-      graduationStatusSpan.textContent =
-        "Keep going! You're on track for graduation.";
+      graduationStatusSpan.textContent = t ? t.graduationKeepGoing : "Keep going! You're on track for graduation.";
       graduationStatusSpan.parentElement.className =
         'inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg';
     }
