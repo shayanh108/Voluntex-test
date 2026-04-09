@@ -827,22 +827,9 @@ function initializeTypewriter() {
     const mottoElement = document.getElementById('motto');
     if (mottoElement && typeof Typed !== 'undefined') {
         const h1 = mottoElement.closest('h1');
-        const badge = document.getElementById('heroBadge');
 
-        // Staggered entrance: badge → h1
+        // Animate h1 sliding up before typewriter starts
         if (typeof anime !== 'undefined') {
-            // Badge slides down first
-            if (badge) {
-                anime({
-                    targets: badge,
-                    translateY: [-16, 0],
-                    opacity: [0, 1],
-                    duration: 600,
-                    easing: 'easeOutExpo',
-                    delay: 0
-                });
-            }
-            // h1 slides up after badge
             if (h1) {
                 anime({
                     targets: h1,
@@ -850,11 +837,10 @@ function initializeTypewriter() {
                     opacity: [0, 1],
                     duration: 800,
                     easing: 'easeOutExpo',
-                    delay: 200
+                    delay: 100
                 });
             }
         } else {
-            if (badge) { badge.style.opacity = '1'; }
             if (h1) { h1.style.opacity = '1'; h1.style.transform = 'translateY(0)'; }
         }
 
@@ -884,17 +870,17 @@ function initializeTypewriter() {
                         }
                     }
 
-                    // 2. Stats row fades up
-                    const statsRow = document.getElementById('heroStats');
-                    if (statsRow) {
+                    // 2. Stat badge slides in
+                    const statBadge = document.querySelector('.hero-stat-badge');
+                    if (statBadge) {
                         if (useAnime) {
-                            anime({ targets: statsRow, translateY: [16, 0], opacity: [0, 1], duration: 600, delay: 250, easing: 'easeOutExpo' });
+                            anime({ targets: statBadge, translateX: [20, 0], opacity: [0, 1], duration: 500, delay: 200, easing: 'easeOutExpo' });
                         } else {
-                            statsRow.style.opacity = '1';
+                            statBadge.style.opacity = '1';
                         }
                     }
 
-                    // 3. Button glow pulse after stats appear
+                    // 3. Button glow pulse
                     setTimeout(() => {
                         const btn = document.getElementById('startMatching');
                         if (btn) btn.classList.add('hero-btn-pulse');

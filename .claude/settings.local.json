@@ -6,7 +6,8 @@
       "Bash(git push:*)",
       "Bash(sed -n '325,339p' \"/C/Users/Administrator/Voluntex/.claude/worktrees/infallible-bardeen/charities.html\")",
       "Bash(sed -n '573,587p' \"/C/Users/Administrator/Voluntex/.claude/worktrees/infallible-bardeen/contact.html\")",
-      "Bash(npx --version)"
+      "Bash(npx --version)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"volunteer nonprofit partnership CTA section modern animated\" --design-system -p \"Voluntex\")"
     ]
   }
 }
