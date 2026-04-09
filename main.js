@@ -855,14 +855,6 @@ function initializeTypewriter() {
             cursorChar: '|',
             autoInsertCss: true,
             onComplete: () => {
-                // Wrap "real change?" in gradient span
-                setTimeout(() => {
-                    const text = mottoElement.innerHTML;
-                    const gradientText = text.replace(/(real change\?)/i,
-                        '<span class="hero-gradient-word">$1</span>');
-                    if (gradientText !== text) mottoElement.innerHTML = gradientText;
-                }, 100);
-
                 // Slide subtitle up
                 setTimeout(() => {
                     const subtitle = document.getElementById('subtitle');

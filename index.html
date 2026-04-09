@@ -154,9 +154,9 @@
             50%      { transform: translateY(-28px) scale(1.05); }
         }
 
-        /* ── Gradient text highlight ── */
-        .hero-gradient-word {
-            background: linear-gradient(90deg, #60a5fa 0%, #818cf8 50%, #34d399 100%);
+        /* ── Subtle gradient on hero h1 in dark mode ── */
+        html.dark .hero-content h1 {
+            background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 55%, #a5b4fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -834,7 +834,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=12"></script>
+    <script src="main.js?v=13"></script>
 
     <!-- Hero particle system (p5.js) -->
     <script>
