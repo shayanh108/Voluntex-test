@@ -826,20 +826,36 @@ function initializeHomePage() {
 function initializeTypewriter() {
     const mottoElement = document.getElementById('motto');
     if (mottoElement && typeof Typed !== 'undefined') {
-        // Slide h1 up before typing starts (Anime.js)
         const h1 = mottoElement.closest('h1');
-        if (h1 && typeof anime !== 'undefined') {
-            anime({
-                targets: h1,
-                translateY: [40, 0],
-                opacity: [0, 1],
-                duration: 800,
-                easing: 'easeOutExpo',
-                delay: 100
-            });
-        } else if (h1) {
-            h1.style.opacity = '1';
-            h1.style.transform = 'translateY(0)';
+        const badge = document.getElementById('heroBadge');
+
+        // Staggered entrance: badge → h1
+        if (typeof anime !== 'undefined') {
+            // Badge slides down first
+            if (badge) {
+                anime({
+                    targets: badge,
+                    translateY: [-16, 0],
+                    opacity: [0, 1],
+                    duration: 600,
+                    easing: 'easeOutExpo',
+                    delay: 0
+                });
+            }
+            // h1 slides up after badge
+            if (h1) {
+                anime({
+                    targets: h1,
+                    translateY: [40, 0],
+                    opacity: [0, 1],
+                    duration: 800,
+                    easing: 'easeOutExpo',
+                    delay: 200
+                });
+            }
+        } else {
+            if (badge) { badge.style.opacity = '1'; }
+            if (h1) { h1.style.opacity = '1'; h1.style.transform = 'translateY(0)'; }
         }
 
         // Clear any existing content
@@ -855,45 +871,35 @@ function initializeTypewriter() {
             cursorChar: '|',
             autoInsertCss: true,
             onComplete: () => {
-                // Slide subtitle up
                 setTimeout(() => {
+                    const useAnime = typeof anime !== 'undefined';
+
+                    // 1. Subtitle slides up
                     const subtitle = document.getElementById('subtitle');
                     if (subtitle) {
-                        if (typeof anime !== 'undefined') {
-                            anime({
-                                targets: subtitle,
-                                translateY: [20, 0],
-                                opacity: [0, 1],
-                                duration: 600,
-                                easing: 'easeOutExpo'
-                            });
+                        if (useAnime) {
+                            anime({ targets: subtitle, translateY: [20, 0], opacity: [0, 1], duration: 600, easing: 'easeOutExpo' });
                         } else {
-                            subtitle.classList.add('animate-fade-in');
                             subtitle.style.opacity = '1';
                         }
                     }
 
-                    // Slide badge in
-                    const badge = document.querySelector('.hero-stat-badge');
-                    if (badge && typeof anime !== 'undefined') {
-                        anime({
-                            targets: badge,
-                            translateX: [30, 0],
-                            opacity: [0, 1],
-                            duration: 500,
-                            delay: 200,
-                            easing: 'easeOutExpo'
-                        });
-                    } else if (badge) {
-                        badge.style.opacity = '1';
+                    // 2. Stats row fades up
+                    const statsRow = document.getElementById('heroStats');
+                    if (statsRow) {
+                        if (useAnime) {
+                            anime({ targets: statsRow, translateY: [16, 0], opacity: [0, 1], duration: 600, delay: 250, easing: 'easeOutExpo' });
+                        } else {
+                            statsRow.style.opacity = '1';
+                        }
                     }
 
-                    // Add button glow pulse
+                    // 3. Button glow pulse after stats appear
                     setTimeout(() => {
                         const btn = document.getElementById('startMatching');
                         if (btn) btn.classList.add('hero-btn-pulse');
-                    }, 400);
-                }, 500);
+                    }, 500);
+                }, 400);
             }
         });
     }
