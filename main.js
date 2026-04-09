@@ -870,13 +870,24 @@ function initializeTypewriter() {
                         }
                     }
 
-                    // 2. Stat badge slides in
+                    // 2. Stat badge slides in + count-up
                     const statBadge = document.querySelector('.hero-stat-badge');
                     if (statBadge) {
                         if (useAnime) {
-                            anime({ targets: statBadge, translateX: [20, 0], opacity: [0, 1], duration: 500, delay: 200, easing: 'easeOutExpo' });
+                            anime({
+                                targets: statBadge,
+                                translateX: [20, 0],
+                                opacity: [0, 1],
+                                duration: 500,
+                                delay: 200,
+                                easing: 'easeOutExpo',
+                                complete: () => {
+                                    if (typeof window.__heroCountUp === 'function') window.__heroCountUp();
+                                }
+                            });
                         } else {
                             statBadge.style.opacity = '1';
+                            if (typeof window.__heroCountUp === 'function') window.__heroCountUp();
                         }
                     }
 

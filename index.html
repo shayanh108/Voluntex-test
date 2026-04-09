@@ -149,19 +149,55 @@
         html.dark .hero-orb { opacity: 0.15; }
         .hero-orb-1 { width: 560px; height: 560px; background: #3b82f6; top: -140px; left: -100px; animation-delay: 0s; }
         .hero-orb-2 { width: 420px; height: 420px; background: #6366f1; bottom: -100px; right: -80px; animation-delay: 7s; }
+        /* JS parallax overrides the float animation, so pause CSS float when mouse is available */
+        @media (hover: hover) {
+            .hero-orb { animation-play-state: paused; }
+        }
         @keyframes heroOrbFloat {
             0%,100% { transform: translateY(0) scale(1); }
             50%      { transform: translateY(-28px) scale(1.05); }
         }
 
-        /* ── Hero h1 gradient (fix bottom clip with padding) ── */
+        /* ── Hero h1 gradient (animated shift) ── */
         html.dark .hero-content h1 {
-            background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 55%, #a5b4fc 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #bfdbfe 40%, #a5b4fc 70%, #c4b5fd 100%);
+            background-size: 250% 250%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             padding-bottom: 0.18em;
             line-height: 1.15;
+            animation: heroGradientShift 6s ease-in-out infinite;
+        }
+        @keyframes heroGradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ── Button shimmer sweep ── */
+        #startMatching {
+            position: relative;
+            overflow: hidden;
+        }
+        #startMatching::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.28) 50%, transparent 100%);
+            transform: skewX(-20deg);
+            animation: btnShimmer 3.5s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        @keyframes btnShimmer {
+            0%   { left: -75%; opacity: 0; }
+            10%  { opacity: 1; }
+            50%  { left: 125%; opacity: 1; }
+            51%  { opacity: 0; }
+            100% { left: 125%; opacity: 0; }
         }
 
         /* ── Hero stat badge ── */
@@ -842,7 +878,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=15"></script>
+    <script src="main.js?v=16"></script>
 
     <!-- Hero particle system (p5.js) -->
     <script>
@@ -1034,4 +1070,66 @@ html.dark nav {
 html.dark .logo-light { display: none; }
 html.dark .logo-dark { display: block; }
 </style>
+
+<script>
+/* ── Mouse parallax on hero orbs ── */
+(function() {
+    var orb1 = document.querySelector('.hero-orb-1');
+    var orb2 = document.querySelector('.hero-orb-2');
+    if (!orb1 || !orb2) return;
+
+    var tx1 = 0, ty1 = 0, tx2 = 0, ty2 = 0;
+    var cx1 = 0, cy1 = 0, cx2 = 0, cy2 = 0;
+
+    document.addEventListener('mousemove', function(e) {
+        var mx = (e.clientX / window.innerWidth  - 0.5);
+        var my = (e.clientY / window.innerHeight - 0.5);
+        tx1 = mx * -28;
+        ty1 = my * -28;
+        tx2 = mx *  22;
+        ty2 = my *  22;
+    });
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function tick() {
+        cx1 = lerp(cx1, tx1, 0.06);
+        cy1 = lerp(cy1, ty1, 0.06);
+        cx2 = lerp(cx2, tx2, 0.06);
+        cy2 = lerp(cy2, ty2, 0.06);
+        orb1.style.transform = 'translate(' + cx1.toFixed(2) + 'px, ' + cy1.toFixed(2) + 'px) scale(1)';
+        orb2.style.transform = 'translate(' + cx2.toFixed(2) + 'px, ' + cy2.toFixed(2) + 'px) scale(1)';
+        requestAnimationFrame(tick);
+    }
+    // Only run if no reduced-motion preference
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        requestAnimationFrame(tick);
+    }
+})();
+
+/* ── Count-up on the stat badge number ── */
+window.__heroCountUp = function() {
+    var badge = document.querySelector('.hero-stat-badge span[data-translate]');
+    if (!badge || badge.dataset.counted) return;
+    badge.dataset.counted = '1';
+
+    var target = 2500;
+    var duration = 1200;
+    var start = null;
+    var lang = (window.currentLanguage === 'fr') ? 'fr' : 'en';
+    var suffix = (lang === 'fr') ? '+ étudiants mis en correspondance' : '+ students matched';
+
+    function step(ts) {
+        if (!start) start = ts;
+        var progress = Math.min((ts - start) / duration, 1);
+        // ease-out cubic
+        var ease = 1 - Math.pow(1 - progress, 3);
+        var val = Math.floor(ease * target);
+        badge.textContent = val.toLocaleString() + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+        else badge.textContent = target.toLocaleString() + suffix;
+    }
+    requestAnimationFrame(step);
+};
+</script>
 </html>
