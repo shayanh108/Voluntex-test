@@ -876,7 +876,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=18"></script>
+    <script src="main.js?v=19"></script>
 
     <!-- Hero: Interactive Network Canvas -->
     <script>
@@ -1178,28 +1178,39 @@ html.dark .logo-dark { display: block; }
 })();
 
 /* ── Count-up on the stat badge number ── */
-window.__heroCountUp = function() {
-    var badge = document.querySelector('.hero-stat-badge span[data-translate]');
-    if (!badge || badge.dataset.counted) return;
-    badge.dataset.counted = '1';
-
-    var target = 2500;
-    var duration = 1200;
-    var start = null;
-    var lang = (window.currentLanguage === 'fr') ? 'fr' : 'en';
-    var suffix = (lang === 'fr') ? '+ étudiants mis en correspondance' : '+ students matched';
-
-    function step(ts) {
-        if (!start) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        // ease-out cubic
-        var ease = 1 - Math.pow(1 - progress, 3);
-        var val = Math.floor(ease * target);
-        badge.textContent = val.toLocaleString() + suffix;
-        if (progress < 1) requestAnimationFrame(step);
-        else badge.textContent = target.toLocaleString() + suffix;
+(function () {
+    function getSuffix() {
+        return (window.currentLanguage === 'fr') ? '+ étudiants mis en correspondance' : '+ students matched';
     }
-    requestAnimationFrame(step);
-};
+
+    /* Set badge to 0 as soon as the page finishes loading,
+       overriding whatever static text applyLanguage() wrote in */
+    window.addEventListener('load', function () {
+        var badge = document.querySelector('.hero-stat-badge span[data-translate]');
+        if (badge) badge.textContent = '0' + getSuffix();
+    });
+
+    /* Called by initializeTypewriter() after typing completes */
+    window.__heroCountUp = function () {
+        var badge = document.querySelector('.hero-stat-badge span[data-translate]');
+        if (!badge || badge.dataset.counted) return;
+        badge.dataset.counted = '1';
+
+        var target   = 2500;
+        var duration = 1400;
+        var start    = null;
+        var suffix   = getSuffix();
+
+        function step(ts) {
+            if (!start) start = ts;
+            var progress = Math.min((ts - start) / duration, 1);
+            var ease     = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            badge.textContent = Math.floor(ease * target).toLocaleString() + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+            else badge.textContent = target.toLocaleString() + suffix;
+        }
+        requestAnimationFrame(step);
+    };
+})();
 </script>
 </html>
