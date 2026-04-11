@@ -876,7 +876,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=41"></script>
+    <script src="main.js?v=42"></script>
 
     <!-- Hero: Interactive Network Canvas v3 -->
     <script>
@@ -1282,39 +1282,105 @@ html.dark .logo-dark { display: block; }
     }
 })();
 
-/* ── Count-up on the stat badge number ── */
+/* ── Slot-machine stat badge ── */
 (function () {
+    var DIGITS = ['2','5','0','0'];   /* spells 2,500 */
+
     function getSuffix() {
-        return (window.currentLanguage === 'fr') ? '+ étudiants mis en correspondance' : '+ students matched';
+        return (window.currentLanguage === 'fr')
+            ? '+ étudiants mis en correspondance'
+            : '+ students matched';
     }
 
-    /* Set badge to 0 as soon as the page finishes loading,
-       overriding whatever static text applyLanguage() wrote in */
+    /* Build individual digit drums inside the badge span */
+    function buildSlots(badge) {
+        badge.innerHTML = '';
+
+        var numWrap = document.createElement('span');
+        numWrap.style.cssText =
+            'display:inline-flex;align-items:flex-end;' +
+            'gap:0;font-variant-numeric:tabular-nums;';
+
+        var drms = [];
+
+        DIGITS.forEach(function (d, i) {
+            /* thousands comma between digit 0 and 1 */
+            if (i === 1) {
+                var comma = document.createElement('span');
+                comma.textContent = ',';
+                numWrap.appendChild(comma);
+            }
+
+            var drum = document.createElement('span');
+            drum.style.cssText =
+                'display:inline-block;height:1.2em;' +
+                'overflow:hidden;vertical-align:bottom;';
+
+            var strip = document.createElement('span');
+            strip.style.cssText =
+                'display:flex;flex-direction:column;' +
+                'transform:translateY(0);will-change:transform;';
+
+            for (var n = 0; n <= 9; n++) {
+                var cell = document.createElement('span');
+                cell.textContent = n;
+                cell.style.cssText =
+                    'display:block;height:1.2em;line-height:1.2em;text-align:center;';
+                strip.appendChild(cell);
+            }
+
+            drum.appendChild(strip);
+            numWrap.appendChild(drum);
+            drms.push(strip);
+        });
+
+        var sfx = document.createElement('span');
+        sfx.style.marginLeft = '3px';
+        sfx.textContent = getSuffix();
+
+        badge.appendChild(numWrap);
+        badge.appendChild(sfx);
+        return drms;
+    }
+
+    var drums = null;
+    var fired = false;
+
+    /* Replace badge text with drums on load — shows 0,000 immediately */
     window.addEventListener('load', function () {
         var badge = document.querySelector('.hero-stat-badge span[data-translate]');
-        if (badge) badge.textContent = '0' + getSuffix();
+        if (!badge) return;
+        drums = buildSlots(badge);
     });
 
     /* Called by initializeTypewriter() after typing completes */
     window.__heroCountUp = function () {
-        var badge = document.querySelector('.hero-stat-badge span[data-translate]');
-        if (!badge || badge.dataset.counted) return;
-        badge.dataset.counted = '1';
+        if (!drums || fired) return;
+        fired = true;
 
-        var target   = 2500;
-        var duration = 1400;
-        var start    = null;
-        var suffix   = getSuffix();
+        drums.forEach(function (strip, idx) {
+            var target = parseInt(DIGITS[idx]);
+            var cur    = 0;
 
-        function step(ts) {
-            if (!start) start = ts;
-            var progress = Math.min((ts - start) / duration, 1);
-            var ease     = 1 - Math.pow(1 - progress, 3); // ease-out cubic
-            badge.textContent = Math.floor(ease * target).toLocaleString() + suffix;
-            if (progress < 1) requestAnimationFrame(step);
-            else badge.textContent = target.toLocaleString() + suffix;
-        }
-        requestAnimationFrame(step);
+            /* spin fast */
+            var iv = setInterval(function () {
+                cur = (cur + 1) % 10;
+                strip.style.transition = 'none';
+                strip.style.transform  =
+                    'translateY(calc(-' + cur + ' * 1.2em))';
+            }, 55);
+
+            /* settle right→left: ones (idx 3) at 700 ms, thousands (idx 0) at 1300 ms */
+            var settleMs = 700 + (DIGITS.length - 1 - idx) * 200;
+
+            setTimeout(function () {
+                clearInterval(iv);
+                strip.style.transition =
+                    'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)';
+                strip.style.transform  =
+                    'translateY(calc(-' + target + ' * 1.2em))';
+            }, settleMs);
+        });
     };
 })();
 </script>
