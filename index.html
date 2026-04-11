@@ -876,7 +876,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=27"></script>
+    <script src="main.js?v=28"></script>
 
     <!-- Hero: Interactive Network Canvas v3 -->
     <script>
@@ -889,7 +889,7 @@
         var reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var lastPulse = 0;
 
-        var NODE_COUNT  = 115;
+        var NODE_COUNT  = 70;
         var CONNECT_D   = 165;
         var REPEL_R     = 112;
         var ATTRACT_R   = 245;
@@ -1029,11 +1029,11 @@
                     if (hm) {
                         dx=n.x-mx; dy=n.y-my; d=Math.sqrt(dx*dx+dy*dy);
                         if (d < REPEL_R && d > 0.5) {
-                            var f=Math.pow(1-d/REPEL_R,2)*5.2;
+                            var f=Math.pow(1-d/REPEL_R,2)*1.6;
                             n.vx+=(dx/d)*f; n.vy+=(dy/d)*f;
                         } else if (d < ATTRACT_R) {
                             var t2=(d-REPEL_R)/(ATTRACT_R-REPEL_R);
-                            var af=(1-t2)*0.46;
+                            var af=(1-t2)*0.12;
                             n.vx-=(dx/d)*af; n.vy-=(dy/d)*af;
                         }
                     }
@@ -1044,7 +1044,7 @@
                         if (band<42 && d>0.5) { var rf=(1-band/42)*3.3*rip.a; n.vx+=(dx/d)*rf; n.vy+=(dy/d)*rf; }
                     }
                     /* deeper nodes damp faster (feels further away) */
-                    var drag = 0.952 + n.z*0.012;
+                    var drag = 0.91 + n.z*0.01;
                     n.vx*=drag; n.vy*=drag;
                     n.x+=n.vx; n.y+=n.vy;
                 }
