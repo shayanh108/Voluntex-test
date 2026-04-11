@@ -876,7 +876,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=35"></script>
+    <script src="main.js?v=36"></script>
 
     <!-- Hero: Interactive Network Canvas v3 -->
     <script>
@@ -1320,53 +1320,49 @@ html.dark .logo-dark { display: block; }
 </script>
 
 <script>
-/* ── Hero 3D card tilt ── */
+/* ── Hero 3D mouse parallax ── */
 (function () {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    var section = document.querySelector('section.min-h-screen');
+    var section = document.querySelector('section.relative.min-h-screen');
     if (!section) return;
 
-    /* The card is the inner max-w-4xl wrapper */
-    var card    = section.querySelector('.max-w-4xl');
-    var h1El    = section.querySelector('h1');
-    var subEl   = document.getElementById('subtitle');
-    var ctaEl   = section.querySelector('.flex.flex-col.sm\\:flex-row');
-
-    if (!card) return;
-
-    /* Add preserve-3d so children can have depth */
-    card.style.transformStyle = 'preserve-3d';
-    card.style.willChange     = 'transform';
-
-    /* Static z-depth per layer — h1 closest, CTA furthest */
-    function setLayerDepth() {
-        if (h1El)  { h1El.style.transform  = 'translateZ(28px)';  h1El.style.willChange  = 'transform'; }
-        if (subEl) { subEl.style.transform = 'translateZ(16px)';  subEl.style.willChange = 'transform'; }
-        if (ctaEl) { ctaEl.style.transform = 'translateZ(8px)';   ctaEl.style.willChange = 'transform'; }
-    }
-    /* Wait for Anime.js entrance animations to finish before locking z-depth */
-    setTimeout(setLayerDepth, 3000);
-
+    var layers = [];   // filled after Anime.js entrance is done
     var tx = 0, ty = 0, cx = 0, cy = 0;
 
+    /* Track mouse across the whole hero including text/button areas */
     section.addEventListener('mousemove', function (e) {
         var r = section.getBoundingClientRect();
-        tx = ((e.clientX - r.left) / r.width  - 0.5) * 2; /* -1 → 1 */
+        tx = ((e.clientX - r.left) / r.width  - 0.5) * 2;  /* -1 to 1 */
         ty = ((e.clientY - r.top)  / r.height - 0.5) * 2;
     });
     section.addEventListener('mouseleave', function () { tx = 0; ty = 0; });
 
+    /* Wait 2.5s so Anime.js entrance animations are fully done,
+       then register each text layer with its own parallax depth */
+    setTimeout(function () {
+        var h1  = section.querySelector('h1');
+        var sub = document.getElementById('subtitle');
+        var cta = section.querySelector('.flex.flex-col');
+        /* depth  = how many px it shifts at full mouse offset
+           closer to 0 = closer to viewer (moves least) */
+        if (h1)  layers.push({ el: h1,  depth: 10 });
+        if (sub) layers.push({ el: sub, depth: 18 });
+        if (cta) layers.push({ el: cta, depth: 24 });
+    }, 2500);
+
     (function tick() {
         requestAnimationFrame(tick);
-        /* Smooth lerp — card lags behind cursor for a fluid feel */
-        cx += (tx - cx) * 0.06;
-        cy += (ty - cy) * 0.06;
+        cx += (tx - cx) * 0.07;
+        cy += (ty - cy) * 0.07;
 
-        card.style.transform =
-            'perspective(1000px) ' +
-            'rotateY(' + (cx * 6).toFixed(2) + 'deg) ' +
-            'rotateX(' + (-cy * 5).toFixed(2) + 'deg)';
+        for (var i = 0; i < layers.length; i++) {
+            var l = layers[i];
+            l.el.style.transform =
+                'translate(' +
+                (-cx * l.depth).toFixed(1) + 'px,' +
+                (-cy * l.depth).toFixed(1) + 'px)';
+        }
     })();
 })();
 </script>
