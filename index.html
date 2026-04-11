@@ -876,7 +876,7 @@
     </script>
 
     <!-- Main JavaScript -->
-    <script src="main.js?v=28"></script>
+    <script src="main.js?v=29"></script>
 
     <!-- Hero: Interactive Network Canvas v3 -->
     <script>
@@ -889,7 +889,7 @@
         var reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         var lastPulse = 0;
 
-        var NODE_COUNT  = 70;
+        var NODE_COUNT  = 100;
         var CONNECT_D   = 165;
         var REPEL_R     = 112;
         var ATTRACT_R   = 245;
@@ -907,7 +907,7 @@
         function mkNode(xBias) {
             var hub = Math.random() < 0.14;
             var z   = Math.random();
-            var spd = 0.03 + z * 0.08;
+            var spd = 0.015 + z * 0.04;
             var br  = hub ? (1.6 + z*2.4) : (0.6 + z*1.7);
             /* xBias: 0=full random, 1=right half, -1=left half */
             var x = xBias === 1  ? W*0.5 + Math.random()*W*0.5
