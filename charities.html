@@ -58,16 +58,16 @@
             position: relative;
             border-radius: 20px;
             padding: 1px;
-            background: rgba(209,213,219,0.4);
+            background: rgba(148,163,184,0.55);
             box-shadow: 0 8px 32px rgba(0,0,0,0.08);
             opacity: 0;
             transform: translateY(18px);
         }
         .dark .filter-card-wrap {
-            background: rgba(55,65,81,0.45);
+            background: rgba(71,85,105,0.65);
             box-shadow: 0 8px 40px rgba(0,0,0,0.3);
         }
-        /* animated gradient border — faint, only on hover */
+        /* animated gradient border — subtle on hover */
         .filter-card-wrap::before {
             content: '';
             position: absolute;
@@ -81,10 +81,79 @@
             opacity: 0;
             transition: opacity 0.5s;
         }
-        .filter-card-wrap:hover::before { opacity: 0.5; }
+        .filter-card-wrap:hover::before { opacity: 0.6; }
         @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
         @keyframes borderSpin { to { --angle: 360deg; } }
         .filter-card-wrap:hover { animation: borderSpin 4s linear infinite; }
+
+        /* ── Custom dropdown ── */
+        .custom-select-wrap { position: relative; }
+        .custom-select-trigger {
+            display: flex; align-items: center; gap: 8px;
+            width: 100%; padding: 11px 14px;
+            border: 1px solid rgb(209,213,219);
+            border-radius: 8px;
+            background: #fff;
+            color: #374151;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            user-select: none;
+        }
+        .dark .custom-select-trigger {
+            background: #1e293b; border-color: #475569; color: #e2e8f0;
+        }
+        .custom-select-trigger:hover,
+        .custom-select-wrap.open .custom-select-trigger {
+            border-color: rgba(99,102,241,0.6);
+            box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+        }
+        .custom-select-trigger .trigger-icon { font-size: 14px; color: #6366f1; flex-shrink: 0; width: 16px; text-align: center; }
+        .custom-select-trigger .trigger-label { flex: 1; font-size: 14px; }
+        .custom-select-chevron {
+            font-size: 11px; color: #9ca3af; flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .custom-select-wrap.open .custom-select-chevron { transform: rotate(180deg); }
+
+        .custom-select-panel {
+            position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+            background: #fff;
+            border: 1px solid rgba(148,163,184,0.5);
+            border-radius: 12px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06);
+            z-index: 200;
+            overflow: hidden;
+            opacity: 0; transform: translateY(-6px) scale(0.98);
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+        .dark .custom-select-panel {
+            background: #1e293b; border-color: rgba(71,85,105,0.6);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+        }
+        .custom-select-wrap.open .custom-select-panel {
+            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
+        }
+        .custom-select-options { padding: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+        .custom-option {
+            display: flex; align-items: center; gap: 6px;
+            padding: 7px 11px; border-radius: 7px; border: none;
+            background: transparent; color: #374151;
+            font-size: 13px; cursor: pointer; white-space: nowrap;
+            transition: background 0.15s, color 0.15s, transform 0.12s;
+            width: 100%;
+        }
+        .dark .custom-option { color: #cbd5e1; }
+        .custom-option:hover { background: rgba(99,102,241,0.08); color: #6366f1; transform: translateX(2px); }
+        .dark .custom-option:hover { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+        .custom-option.selected {
+            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(59,130,246,0.12));
+            color: #6366f1; font-weight: 500;
+        }
+        .dark .custom-option.selected { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+        .custom-option .opt-icon { width: 18px; text-align: center; font-size: 13px; flex-shrink: 0; }
+        /* location panel: single column */
+        .location-panel .custom-select-options { flex-direction: column; flex-wrap: nowrap; }
 
         .filter-card {
             background: rgba(255,255,255,0.95);
@@ -276,40 +345,52 @@
                     </div>
 
                     <!-- Cause Area Filter -->
-                    <div class="filter-entrance">
-                        <label for="causeFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="causeArea">Cause Area</label>
-                        <select id="causeFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800
- dark:text-white
- transition-all">
-                            <option value="" data-translate="allCauses">All Causes</option>
-                            <option value="Youth Services" data-translate="causeYouthServices">Youth Services</option>
-                            <option value="Youth Mentorship" data-translate="causeYouthMentorship">Youth Mentorship</option>
-                            <option value="Food Security" data-translate="causeFoodSecurity">Food Security</option>
-                            <option value="Animal Welfare" data-translate="causeAnimalWelfare">Animal Welfare</option>
-                            <option value="Mental Health" data-translate="causeMentalHealth">Mental Health</option>
-                            <option value="Senior Support" data-translate="causeSeniorSupport">Senior Support</option>
-                            <option value="Environmental" data-translate="causeEnvironmental">Environmental</option>
-                            <option value="Healthcare" data-translate="causeHealthcare">Healthcare</option>
-                            <option value="Women & Children's Shelter" data-translate="causeWomens">Women &amp; Children's Shelter</option>
-                        </select>
+                    <div class="filter-entrance custom-select-wrap" id="causeWrap">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="causeArea">Cause Area</label>
+                        <div class="custom-select-trigger" id="causeTrigger">
+                            <i class="fa-solid fa-layer-group trigger-icon"></i>
+                            <span class="trigger-label" id="causeLabel">All Causes</span>
+                            <i class="fa-solid fa-chevron-down custom-select-chevron"></i>
+                        </div>
+                        <div class="custom-select-panel" id="causePanel">
+                            <div class="custom-select-options">
+                                <button class="custom-option selected" data-value=""><span class="opt-icon"><i class="fa-solid fa-border-all"></i></span>All Causes</button>
+                                <button class="custom-option" data-value="Youth Services"><span class="opt-icon"><i class="fa-solid fa-graduation-cap"></i></span>Youth Services</button>
+                                <button class="custom-option" data-value="Youth Mentorship"><span class="opt-icon"><i class="fa-solid fa-handshake"></i></span>Youth Mentorship</button>
+                                <button class="custom-option" data-value="Food Security"><span class="opt-icon"><i class="fa-solid fa-wheat-awn"></i></span>Food Security</button>
+                                <button class="custom-option" data-value="Animal Welfare"><span class="opt-icon"><i class="fa-solid fa-paw"></i></span>Animal Welfare</button>
+                                <button class="custom-option" data-value="Mental Health"><span class="opt-icon"><i class="fa-solid fa-brain"></i></span>Mental Health</button>
+                                <button class="custom-option" data-value="Senior Support"><span class="opt-icon"><i class="fa-solid fa-person-cane"></i></span>Senior Support</button>
+                                <button class="custom-option" data-value="Environmental"><span class="opt-icon"><i class="fa-solid fa-leaf"></i></span>Environmental</button>
+                                <button class="custom-option" data-value="Healthcare"><span class="opt-icon"><i class="fa-solid fa-heart-pulse"></i></span>Healthcare</button>
+                                <button class="custom-option" data-value="Women &amp; Children's Shelter"><span class="opt-icon"><i class="fa-solid fa-house-chimney-heart"></i></span>Women &amp; Children's</button>
+                            </div>
+                        </div>
+                        <select id="causeFilter" class="hidden"></select>
                     </div>
-                    
+
                     <!-- Location Filter -->
-                    <div class="filter-entrance">
-                        <label for="locationFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="locationLabel">Location</label>
-                        <select id="locationFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800
- dark:text-white
- transition-all">
-                            <option value="" data-translate="allLocations">All Locations</option>
-                            <option value="Richmond Hill">Richmond Hill</option>
-                            <option value="Markham">Markham</option>
-                            <option value="Vaughan">Vaughan</option>
-                            <option value="Aurora">Aurora</option>
-                            <option value="Newmarket">Newmarket</option>
-                            <option value="Keswick">Keswick</option>
-                            <option value="Stouffville">Stouffville</option>
-                            <option value="East Gwillimbury">East Gwillimbury</option>
-                        </select>
+                    <div class="filter-entrance custom-select-wrap" id="locationWrap">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="locationLabel">Location</label>
+                        <div class="custom-select-trigger" id="locationTrigger">
+                            <i class="fa-solid fa-location-dot trigger-icon"></i>
+                            <span class="trigger-label" id="locationLabel">All Locations</span>
+                            <i class="fa-solid fa-chevron-down custom-select-chevron"></i>
+                        </div>
+                        <div class="custom-select-panel location-panel" id="locationPanel">
+                            <div class="custom-select-options">
+                                <button class="custom-option selected" data-value=""><span class="opt-icon"><i class="fa-solid fa-map"></i></span>All Locations</button>
+                                <button class="custom-option" data-value="Richmond Hill"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Richmond Hill</button>
+                                <button class="custom-option" data-value="Markham"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Markham</button>
+                                <button class="custom-option" data-value="Vaughan"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Vaughan</button>
+                                <button class="custom-option" data-value="Aurora"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Aurora</button>
+                                <button class="custom-option" data-value="Newmarket"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Newmarket</button>
+                                <button class="custom-option" data-value="Keswick"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Keswick</button>
+                                <button class="custom-option" data-value="Stouffville"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>Stouffville</button>
+                                <button class="custom-option" data-value="East Gwillimbury"><span class="opt-icon"><i class="fa-solid fa-location-dot"></i></span>East Gwillimbury</button>
+                            </div>
+                        </div>
+                        <select id="locationFilter" class="hidden"></select>
                     </div>
                 </div>
                 
@@ -677,6 +758,42 @@
                 if (!this._fromPill) {
                     document.querySelectorAll('.quick-filter-btn').forEach(p => p.classList.remove('active'));
                 }
+            });
+
+            /* ── Custom dropdowns ── */
+            function initCustomSelect(wrapperId, triggerLabelId, panelId, nativeSelectId) {
+                var wrap   = document.getElementById(wrapperId);
+                var label  = document.getElementById(triggerLabelId);
+                var panel  = document.getElementById(panelId);
+                var native = document.getElementById(nativeSelectId);
+                if (!wrap) return;
+
+                wrap.querySelector('.custom-select-trigger').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var isOpen = wrap.classList.contains('open');
+                    // close all others
+                    document.querySelectorAll('.custom-select-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+                    if (!isOpen) wrap.classList.add('open');
+                });
+
+                panel.querySelectorAll('.custom-option').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var val = this.dataset.value;
+                        panel.querySelectorAll('.custom-option').forEach(function(b) { b.classList.remove('selected'); });
+                        this.classList.add('selected');
+                        label.textContent = this.textContent.trim();
+                        native.value = val;
+                        native.dispatchEvent(new Event('change'));
+                        wrap.classList.remove('open');
+                    });
+                });
+            }
+
+            initCustomSelect('causeWrap',    'causeLabel',    'causePanel',    'causeFilter');
+            initCustomSelect('locationWrap', 'locationLabel', 'locationPanel', 'locationFilter');
+
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.custom-select-wrap.open').forEach(function(w) { w.classList.remove('open'); });
             });
 
             /* ── 5. Staggered entrance animation ── */
