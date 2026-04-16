@@ -886,7 +886,8 @@
         var canvas, ctx, W, H;
         var mouse = { x: -9999, y: -9999 };
         var nodes = [], packets = [], trail = [];
-        var reduced   = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var reduced    = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var isClicking = false;
 
         var NODE_COUNT  = 130;
         var CONNECT_D   = 165;
@@ -943,6 +944,10 @@
                 mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top;
             });
             hero.addEventListener('mouseleave', function() { mouse.x=-9999; mouse.y=-9999; trail.length=0; });
+            hero.addEventListener('mousedown',  function() { isClicking = true; });
+            hero.addEventListener('mouseup',    function() { isClicking = false; });
+            hero.addEventListener('touchstart', function() { isClicking = true; },  { passive: true });
+            hero.addEventListener('touchend',   function() { isClicking = false; }, { passive: true });
             requestAnimationFrame(draw);
         }
 
@@ -1001,7 +1006,7 @@
                     n.vx += Math.sin(t*0.38 + n.ph       ) * 0.002;
                     n.vy += Math.cos(t*0.38 + n.ph * 1.37) * 0.002;
 
-                    if (hm) {
+                    if (hm && !isClicking) {
                         dx=n.x-mx; dy=n.y-my; d=Math.sqrt(dx*dx+dy*dy);
                         if (d < REPEL_R && d > 0.5) {
                             var f=Math.pow(1-d/REPEL_R,2)*0.15;
