@@ -53,14 +53,110 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         
+        /* ── 1. Glassmorphism container ── */
+        .filter-card-wrap {
+            position: relative;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.25) 0%, rgba(59,130,246,0.15) 50%, rgba(139,92,246,0.25) 100%);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(99,102,241,0.08);
+            opacity: 0;
+            transform: translateY(18px);
+        }
+        .dark .filter-card-wrap {
+            background: linear-gradient(135deg, rgba(99,102,241,0.35) 0%, rgba(59,130,246,0.2) 50%, rgba(139,92,246,0.35) 100%);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 2px 12px rgba(99,102,241,0.2), inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+        /* animated gradient border */
+        .filter-card-wrap::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: conic-gradient(from var(--angle, 0deg), #6366f1, #3b82f6, #8b5cf6, #60a5fa, #6366f1);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .filter-card-wrap:hover::before { opacity: 1; }
+        @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+        @keyframes borderSpin { to { --angle: 360deg; } }
+        .filter-card-wrap:hover { animation: borderSpin 4s linear infinite; }
+
         .filter-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 18px;
+            border: none;
         }
-        
         .dark .filter-card {
-            background: rgba(30, 41, 59, 0.95);
+            background: rgba(15, 23, 42, 0.75);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
         }
+
+        /* ── 2. Search input focus glow ── */
+        .search-input-wrap { position: relative; }
+        .search-input-wrap::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #6366f1, #3b82f6);
+            opacity: 0;
+            z-index: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .search-input-wrap:focus-within::after { opacity: 1; }
+        .search-input-wrap input,
+        .search-input-wrap i {
+            position: relative;
+            z-index: 1;
+        }
+        .search-input-wrap input {
+            box-shadow: none;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .search-input-wrap:focus-within input {
+            box-shadow: 0 0 0 3px rgba(99,102,241,0.18), 0 0 20px rgba(59,130,246,0.15);
+            border-color: transparent !important;
+        }
+        /* search icon colour cycle on focus */
+        .search-input-wrap:focus-within .fa-search {
+            animation: iconGlow 2.5s ease-in-out infinite;
+        }
+        @keyframes iconGlow {
+            0%,100% { color: #6366f1; }
+            50%      { color: #3b82f6; }
+        }
+
+        /* ── 4. Quick filter pills – 3D press & lift ── */
+        .quick-filter-btn {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease, color 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            will-change: transform;
+        }
+        .quick-filter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+        }
+        .quick-filter-btn:active {
+            transform: translateY(2px) scale(0.96);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .quick-filter-btn.active {
+            background: linear-gradient(135deg, #6366f1, #3b82f6) !important;
+            color: #fff !important;
+            box-shadow: 0 4px 14px rgba(99,102,241,0.4);
+            transform: translateY(-1px);
+        }
+
+        /* ── 5. Staggered entrance – applied via JS ── */
+        .filter-entrance { opacity: 0; transform: translateY(14px); }
         
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -185,24 +281,23 @@
     <!-- Search and Filter Section -->
     <section class="py-8 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="filter-card rounded-2xl p-6 shadow-lg">
+            <div class="filter-card-wrap">
+            <div class="filter-card p-6">
                 <div class="grid md:grid-cols-4 gap-4">
                     <!-- Search Input -->
-                    <div class="md:col-span-2">
+                    <div class="md:col-span-2 filter-entrance">
                         <label for="searchInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="searchOrganizations">Search Organizations</label>
-                        <div class="relative">
+                        <div class="search-input-wrap relative">
                             <input type="text" id="searchInput" placeholder="Search by name or description..." data-translate-placeholder="searchPlaceholder"
-                                   class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700
- dark:text-white
- transition-all">
-                            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600"></i>
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-slate-800 dark:text-white transition-all">
+                            <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                         </div>
                     </div>
-                    
+
                     <!-- Cause Area Filter -->
-                    <div>
+                    <div class="filter-entrance">
                         <label for="causeFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="causeArea">Cause Area</label>
-                        <select id="causeFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
+                        <select id="causeFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800
  dark:text-white
  transition-all">
                             <option value="" data-translate="allCauses">All Causes</option>
@@ -219,9 +314,9 @@
                     </div>
                     
                     <!-- Location Filter -->
-                    <div>
+                    <div class="filter-entrance">
                         <label for="locationFilter" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="locationLabel">Location</label>
-                        <select id="locationFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
+                        <select id="locationFilter" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-800
  dark:text-white
  transition-all">
                             <option value="" data-translate="allLocations">All Locations</option>
@@ -237,7 +332,7 @@
                     </div>
                 </div>
                 
-                <div class="flex flex-wrap gap-2 mt-4 items-center">
+                <div class="flex flex-wrap gap-2 mt-4 items-center filter-entrance">
                     <span class="text-sm text-gray-600 dark:text-gray-300" data-translate="quickFilters">Quick filters:</span>
                     <button data-cause="Food Security" onclick="quickFilter('Food Security', this)" class="quick-filter-btn px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-white rounded-full text-sm" data-translate="foodSecurity">
                         Food Security
@@ -253,6 +348,7 @@
                     </button>
                 </div>
             </div>
+            </div><!-- /filter-card-wrap -->
         </div>
     </section>
 
@@ -600,6 +696,34 @@
                 if (!this._fromPill) {
                     document.querySelectorAll('.quick-filter-btn').forEach(p => p.classList.remove('active'));
                 }
+            });
+
+            /* ── 5. Staggered entrance animation ── */
+            var wrap = document.querySelector('.filter-card-wrap');
+            var items = document.querySelectorAll('.filter-entrance');
+
+            /* Animate the card wrapper in first */
+            anime({ targets: wrap, opacity: [0,1], translateY: [18,0], duration: 600, easing: 'easeOutExpo', delay: 80 });
+
+            /* Then stagger each field/pill row */
+            anime({
+                targets: items,
+                opacity: [0, 1],
+                translateY: [14, 0],
+                duration: 500,
+                easing: 'easeOutExpo',
+                delay: anime.stagger(90, { start: 200 })
+            });
+
+            /* Stagger the individual pill buttons */
+            anime({
+                targets: '.quick-filter-btn',
+                opacity: [0, 1],
+                translateY: [8, 0],
+                scale: [0.9, 1],
+                duration: 380,
+                easing: 'easeOutBack',
+                delay: anime.stagger(70, { start: 500 })
             });
         });
     </script>
