@@ -53,21 +53,21 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
         
-        /* ── 1. Glassmorphism container ── */
+        /* ── 1. Container: neutral border, no colour fill ── */
         .filter-card-wrap {
             position: relative;
             border-radius: 20px;
             padding: 2px;
-            background: linear-gradient(135deg, rgba(99,102,241,0.25) 0%, rgba(59,130,246,0.15) 50%, rgba(139,92,246,0.25) 100%);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(99,102,241,0.08);
+            background: rgba(209,213,219,0.6); /* light: subtle gray border */
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
             opacity: 0;
             transform: translateY(18px);
         }
         .dark .filter-card-wrap {
-            background: linear-gradient(135deg, rgba(99,102,241,0.35) 0%, rgba(59,130,246,0.2) 50%, rgba(139,92,246,0.35) 100%);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 2px 12px rgba(99,102,241,0.2), inset 0 1px 0 rgba(255,255,255,0.04);
+            background: rgba(55,65,81,0.7); /* dark: original slate border tone */
+            box-shadow: 0 8px 40px rgba(0,0,0,0.35);
         }
-        /* animated gradient border */
+        /* animated gradient border — only visible on hover */
         .filter-card-wrap::before {
             content: '';
             position: absolute;
@@ -87,15 +87,15 @@
         .filter-card-wrap:hover { animation: borderSpin 4s linear infinite; }
 
         .filter-card {
-            background: rgba(255,255,255,0.92);
+            background: rgba(255,255,255,0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 18px;
             border: none;
         }
         .dark .filter-card {
-            background: rgba(15, 23, 42, 0.75);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+            background: rgba(30,41,59,0.98);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
         }
 
         /* ── 2. Search input focus glow ── */
