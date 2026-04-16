@@ -43,6 +43,19 @@ const organizations = [
         image: "images/jerichoyouth.jpg"
     },
     {
+        name: "Georgina Community Food Pantry",
+        nameFr: "Banque alimentaire communautaire de Georgina",
+        causeArea: "Food Security",
+        causeAreaFr: "Sécurité alimentaire",
+        website: "https://georginafoodpantry.com/",
+        email: "",
+        phone: "(905) 596-0557",
+        address: "Georgina, ON",
+        description: "Striving to create an inclusive and food secure community. Volunteers support food distribution, the Keswick Community Fridge, and client resource programs across Georgina.",
+        descriptionFr: "S'efforce de créer une communauté inclusive et sécurisée alimentaire. Les bénévoles soutiennent la distribution alimentaire, le frigo communautaire de Keswick et les programmes de ressources pour les clients.",
+        image: "https://img1.wsimg.com/isteam/ip/34b73412-0597-49cb-b2da-00787a4649d6/blob-3ae4b4b.png/:/rs=h:151,cg:true,m/qt=q:95"
+    },
+    {
         name: "Food Bank of York Region",
         nameFr: "Banque alimentaire de la région de York",
         causeArea: "Food Security",
