@@ -100,7 +100,7 @@
             user-select: none;
         }
         .dark .custom-select-trigger {
-            background: #1e293b; border-color: #475569; color: #e2e8f0;
+            background: #334155; border-color: #475569; color: #e2e8f0;
         }
         .custom-select-trigger:hover,
         .custom-select-wrap.open .custom-select-trigger {
@@ -116,22 +116,23 @@
         .custom-select-wrap.open .custom-select-chevron { transform: rotate(180deg); }
 
         .custom-select-panel {
-            position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+            position: absolute;
             background: #fff;
             border: 1px solid rgba(148,163,184,0.5);
             border-radius: 12px;
             box-shadow: 0 12px 36px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06);
-            z-index: 200;
+            z-index: 9999;
             overflow: hidden;
             opacity: 0; transform: translateY(-6px) scale(0.98);
             pointer-events: none;
             transition: opacity 0.18s ease, transform 0.18s ease;
         }
-        .dark .custom-select-panel {
+        .dark .custom-select-panel,
+        html.dark .custom-select-panel {
             background: #1e293b; border-color: rgba(71,85,105,0.6);
             box-shadow: 0 12px 36px rgba(0,0,0,0.4);
         }
-        .custom-select-wrap.open .custom-select-panel {
+        .custom-select-panel.open {
             opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
         }
         .custom-select-options { padding: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
@@ -163,7 +164,7 @@
             border: none;
         }
         .dark .filter-card {
-            background: rgba(30,41,59,0.98);
+            background: rgba(30, 41, 59, 0.95);
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
         }
 
@@ -339,7 +340,7 @@
                         <label for="searchInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="searchOrganizations">Search Organizations</label>
                         <div class="search-input-wrap relative">
                             <input type="text" id="searchInput" placeholder="Search by name or description..." data-translate-placeholder="searchPlaceholder"
-                                   class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-slate-800 dark:text-white transition-all">
+                                   class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-slate-700 dark:text-white transition-all">
                             <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                         </div>
                     </div>
@@ -760,41 +761,67 @@
                 }
             });
 
-            /* ── Custom dropdowns ── */
+            /* ── Custom dropdowns (fixed-position panels to avoid clipping) ── */
+            function positionPanel(trigger, panel) {
+                var r = trigger.getBoundingClientRect();
+                panel.style.top    = (r.bottom + window.scrollY + 6) + 'px';
+                panel.style.left   = r.left + 'px';
+                panel.style.width  = r.width + 'px';
+                panel.style.right  = 'auto';
+            }
+
             function initCustomSelect(wrapperId, triggerLabelId, panelId, nativeSelectId) {
-                var wrap   = document.getElementById(wrapperId);
-                var label  = document.getElementById(triggerLabelId);
-                var panel  = document.getElementById(panelId);
-                var native = document.getElementById(nativeSelectId);
+                var wrap    = document.getElementById(wrapperId);
+                var label   = document.getElementById(triggerLabelId);
+                var panel   = document.getElementById(panelId);
+                var native  = document.getElementById(nativeSelectId);
+                var trigger = wrap ? wrap.querySelector('.custom-select-trigger') : null;
                 if (!wrap) return;
 
-                wrap.querySelector('.custom-select-trigger').addEventListener('click', function(e) {
+                // move panel to body so it isn't clipped by any ancestor overflow
+                document.body.appendChild(panel);
+
+                trigger.addEventListener('click', function(e) {
                     e.stopPropagation();
                     var isOpen = wrap.classList.contains('open');
-                    // close all others
-                    document.querySelectorAll('.custom-select-wrap.open').forEach(function(w) { w.classList.remove('open'); });
-                    if (!isOpen) wrap.classList.add('open');
+                    closeAll();
+                    if (!isOpen) {
+                        positionPanel(trigger, panel);
+                        wrap.classList.add('open');
+                        panel.classList.add('open');
+                    }
                 });
 
                 panel.querySelectorAll('.custom-option').forEach(function(btn) {
-                    btn.addEventListener('click', function() {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
                         var val = this.dataset.value;
                         panel.querySelectorAll('.custom-option').forEach(function(b) { b.classList.remove('selected'); });
                         this.classList.add('selected');
                         label.textContent = this.textContent.trim();
                         native.value = val;
                         native.dispatchEvent(new Event('change'));
-                        wrap.classList.remove('open');
+                        closeAll();
                     });
                 });
+
+                window.addEventListener('resize', function() {
+                    if (wrap.classList.contains('open')) positionPanel(trigger, panel);
+                });
+                window.addEventListener('scroll', function() {
+                    if (wrap.classList.contains('open')) positionPanel(trigger, panel);
+                }, { passive: true });
+            }
+
+            function closeAll() {
+                document.querySelectorAll('.custom-select-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+                document.querySelectorAll('.custom-select-panel.open').forEach(function(p) { p.classList.remove('open'); });
             }
 
             initCustomSelect('causeWrap',    'causeLabel',    'causePanel',    'causeFilter');
             initCustomSelect('locationWrap', 'locationLabel', 'locationPanel', 'locationFilter');
 
-            document.addEventListener('click', function() {
-                document.querySelectorAll('.custom-select-wrap.open').forEach(function(w) { w.classList.remove('open'); });
-            });
+            document.addEventListener('click', closeAll);
 
             /* ── 5. Staggered entrance animation ── */
             var wrap = document.querySelector('.filter-card-wrap');
