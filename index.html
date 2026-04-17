@@ -241,10 +241,91 @@
             .hero-orb, .hero-scroll-dot { animation: none; }
             .hero-btn-pulse { animation: none; }
         }
-        
+
         /* Ensure proper contrast in hero section */
         .dark .bg-gradient-to-br.from-blue-50.to-indigo-100 {
             background: linear-gradient(to bottom right, #0F172A, #1E293B) !important;
+        }
+
+        /* ── Matching Form Custom Dropdowns ── */
+        .vx-select-wrap { position: relative; }
+        .vx-select-trigger {
+            display: flex; align-items: center; gap: 8px;
+            width: 100%; padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: #fff;
+            color: #374151;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            user-select: none;
+        }
+        .dark .vx-select-trigger {
+            background: #334155; border-color: #475569; color: #e2e8f0;
+        }
+        .vx-select-trigger:hover,
+        .vx-select-wrap.open .vx-select-trigger {
+            border-color: rgba(99,102,241,0.6);
+            box-shadow: 0 0 0 2px rgba(99,102,241,0.15);
+        }
+        .vx-select-trigger .vx-t-icon { font-size: 14px; color: #6366f1; flex-shrink: 0; width: 16px; text-align: center; }
+        .vx-select-trigger .vx-t-label { flex: 1; font-size: 15px; }
+        .vx-select-chevron {
+            font-size: 11px; color: #9ca3af; flex-shrink: 0;
+            transition: transform 0.25s ease;
+        }
+        .vx-select-wrap.open .vx-select-chevron { transform: rotate(180deg); }
+
+        .vx-select-panel {
+            position: absolute;
+            background: #fff;
+            border: 1px solid rgba(209,213,219,0.8);
+            border-radius: 10px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+            z-index: 9999;
+            opacity: 0;
+            transform: translateY(-6px) scale(0.98);
+            pointer-events: none;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+            min-width: 200px;
+        }
+        html.dark .vx-select-panel {
+            background: #1e293b; border-color: rgba(71,85,105,0.6);
+            box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+        }
+        .vx-select-panel.open {
+            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
+        }
+        .vx-select-options { padding: 6px; display: flex; flex-direction: column; gap: 2px; }
+        .vx-option {
+            display: flex; align-items: center; gap: 8px;
+            padding: 9px 12px;
+            border-radius: 6px;
+            border: none; background: none;
+            color: #374151;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: left;
+            width: 100%;
+            transition: background 0.15s;
+        }
+        html.dark .vx-option { color: #e2e8f0; }
+        .vx-option:hover { background: rgba(99,102,241,0.08); }
+        .vx-option.selected {
+            background: rgba(99,102,241,0.12);
+            color: #6366f1;
+            font-weight: 600;
+        }
+        html.dark .vx-option.selected { color: #a5b4fc; }
+        .vx-option .opt-icon { width: 18px; text-align: center; font-size: 13px; flex-shrink: 0; color: #6366f1; }
+        html.dark .vx-option .opt-icon { color: #a5b4fc; }
+
+        /* Grid layout for field of interest */
+        .vx-select-options.grid-opts {
+            display: flex; flex-wrap: wrap; flex-direction: row; gap: 4px;
+        }
+        .vx-select-options.grid-opts .vx-option {
+            width: calc(50% - 2px);
         }
     </style>
 </head>
@@ -381,37 +462,67 @@
                    
                     
                     <!-- Grade -->
-                    <div class="form-element md:col-span-2">
-                        <label for="grade" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="grade">Grade</label>
-                        <select id="grade" name="grade" required 
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
- dark:text-white
- transition-all">
-                            <option value="" data-translate="selectGrade">Select your grade</option>
-                            <option value="9" data-translate="grade9">Grade 9</option>
-                            <option value="10" data-translate="grade10">Grade 10</option>
-                            <option value="11" data-translate="grade11">Grade 11</option>
-                            <option value="12" data-translate="grade12">Grade 12</option>
+                    <div class="form-element md:col-span-2 vx-select-wrap" id="gradeWrap">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="grade">Grade</label>
+                        <!-- Hidden native select for form JS compatibility -->
+                        <select id="grade" name="grade" required style="display:none;">
+                            <option value=""></option>
+                            <option value="9">Grade 9</option>
+                            <option value="10">Grade 10</option>
+                            <option value="11">Grade 11</option>
+                            <option value="12">Grade 12</option>
                         </select>
+                        <!-- Custom trigger -->
+                        <div class="vx-select-trigger" id="gradeTrigger">
+                            <i class="fa-solid fa-graduation-cap vx-t-icon"></i>
+                            <span class="vx-t-label" id="gradeLabel" data-translate="selectGrade">Select your grade</span>
+                            <i class="fa-solid fa-chevron-down vx-select-chevron"></i>
+                        </div>
+                        <!-- Panel appended to body by JS -->
+                        <div class="vx-select-panel" id="gradePanel">
+                            <div class="vx-select-options">
+                                <button class="vx-option" data-value="9"><span class="opt-icon"><i class="fa-solid fa-9"></i></span>Grade 9</button>
+                                <button class="vx-option" data-value="10"><span class="opt-icon"><i class="fa-solid fa-1"></i></span>Grade 10</button>
+                                <button class="vx-option" data-value="11"><span class="opt-icon"><i class="fa-solid fa-graduation-cap"></i></span>Grade 11</button>
+                                <button class="vx-option" data-value="12"><span class="opt-icon"><i class="fa-solid fa-user-graduate"></i></span>Grade 12</button>
+                            </div>
+                        </div>
                     </div>
-                    
+
                     <!-- Field of Interest -->
-                    <div class="form-element md:col-span-2">
-                        <label for="fieldOfInterest" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="fieldOfInterest">Field of Interest</label>
-                        <select id="fieldOfInterest" name="fieldOfInterest" required 
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 
- dark:text-white
- transition-all">
-                            <option value="" data-translate="selectAField">Select a field</option>
-                            <option value="Youth Services" data-translate="optYouthServices">Youth Services & Mentorship</option>
-                            <option value="Food Security" data-translate="optFoodSecurity">Food Security & Nutrition</option>
-                            <option value="Animal Welfare" data-translate="optAnimalWelfare">Animal Welfare & Care</option>
-                            <option value="Mental Health" data-translate="optMentalHealth">Mental Health & Wellness</option>
-                            <option value="Senior Support" data-translate="optSeniorSupport">Senior Support & Care</option>
-                            <option value="Environmental" data-translate="optEnvironmental">Environmental & Sustainability</option>
-                            <option value="Healthcare" data-translate="optHealthcare">Healthcare & Medical</option>
-                            <option value="Women & Children's Shelter" data-translate="optWomensServices">Women & Children's Services</option>
+                    <div class="form-element md:col-span-2 vx-select-wrap" id="fieldWrap">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" data-translate="fieldOfInterest">Field of Interest</label>
+                        <!-- Hidden native select for form JS compatibility -->
+                        <select id="fieldOfInterest" name="fieldOfInterest" required style="display:none;">
+                            <option value=""></option>
+                            <option value="Youth Services">Youth Services & Mentorship</option>
+                            <option value="Food Security">Food Security & Nutrition</option>
+                            <option value="Animal Welfare">Animal Welfare & Care</option>
+                            <option value="Mental Health">Mental Health & Wellness</option>
+                            <option value="Senior Support">Senior Support & Care</option>
+                            <option value="Environmental">Environmental & Sustainability</option>
+                            <option value="Healthcare">Healthcare & Medical</option>
+                            <option value="Women &amp; Children's Shelter">Women &amp; Children's Services</option>
                         </select>
+                        <!-- Custom trigger -->
+                        <div class="vx-select-trigger" id="fieldTrigger">
+                            <i class="fa-solid fa-border-all vx-t-icon"></i>
+                            <span class="vx-t-label" id="fieldLabel" data-translate="selectAField">Select a field</span>
+                            <i class="fa-solid fa-chevron-down vx-select-chevron"></i>
+                        </div>
+                        <!-- Panel appended to body by JS -->
+                        <div class="vx-select-panel" id="fieldPanel">
+                            <div class="vx-select-options grid-opts">
+                                <button class="vx-option" data-value="Youth Services"><span class="opt-icon"><i class="fa-solid fa-graduation-cap"></i></span>Youth Services</button>
+                                <button class="vx-option" data-value="Food Security"><span class="opt-icon"><i class="fa-solid fa-wheat-awn"></i></span>Food Security</button>
+                                <button class="vx-option" data-value="Animal Welfare"><span class="opt-icon"><i class="fa-solid fa-paw"></i></span>Animal Welfare</button>
+                                <button class="vx-option" data-value="Mental Health"><span class="opt-icon"><i class="fa-solid fa-brain"></i></span>Mental Health</button>
+                                <button class="vx-option" data-value="Senior Support"><span class="opt-icon"><i class="fa-solid fa-person-cane"></i></span>Senior Support</button>
+                                <button class="vx-option" data-value="Environmental"><span class="opt-icon"><i class="fa-solid fa-leaf"></i></span>Environmental</button>
+                                <button class="vx-option" data-value="Healthcare"><span class="opt-icon"><i class="fa-solid fa-heart-pulse"></i></span>Healthcare</button>
+                                <button class="vx-option" data-value="Women &amp; Children's Shelter"><span class="opt-icon"><i class="fa-solid fa-shield-heart"></i></span>Women &amp; Children's</button>
+                            </div>
+                        </div>
                     </div>
                 </div>   
                 <div class="text-center mt-8 flex w-full justify-center">
@@ -871,6 +982,80 @@
 
     <!-- Main JavaScript -->
     <script src="main.js?v=43"></script>
+
+    <!-- Custom Dropdown Portal JS -->
+    <script>
+    (function() {
+        function positionPanel(trigger, panel) {
+            var r = trigger.getBoundingClientRect();
+            panel.style.top   = (r.bottom + window.scrollY + 6) + 'px';
+            panel.style.left  = r.left + 'px';
+            panel.style.width = r.width + 'px';
+        }
+
+        function setupVxSelect(wrapId, panelId, nativeId, labelId, triggerIconClass) {
+            var wrap    = document.getElementById(wrapId);
+            var panel   = document.getElementById(panelId);
+            var native  = document.getElementById(nativeId);
+            var label   = document.getElementById(labelId);
+            var trigger = wrap ? wrap.querySelector('.vx-select-trigger') : null;
+            if (!wrap || !panel || !native || !trigger) return;
+
+            /* Move panel to body for portal positioning */
+            document.body.appendChild(panel);
+
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var isOpen = wrap.classList.contains('open');
+                closeAll();
+                if (!isOpen) {
+                    positionPanel(trigger, panel);
+                    wrap.classList.add('open');
+                    panel.classList.add('open');
+                }
+            });
+
+            panel.querySelectorAll('.vx-option').forEach(function(opt) {
+                opt.addEventListener('click', function() {
+                    var val = opt.dataset.value;
+                    /* Update hidden select */
+                    native.value = val;
+                    /* Update trigger label */
+                    label.textContent = opt.textContent.trim();
+                    /* Update trigger icon */
+                    var tIcon = trigger.querySelector('.vx-t-icon');
+                    var optIcon = opt.querySelector('.opt-icon i');
+                    if (tIcon && optIcon) {
+                        tIcon.className = optIcon.className + ' vx-t-icon';
+                    }
+                    /* Highlight selected */
+                    panel.querySelectorAll('.vx-option').forEach(function(o) { o.classList.remove('selected'); });
+                    opt.classList.add('selected');
+                    closeAll();
+                });
+            });
+
+            window.addEventListener('resize', function() {
+                if (wrap.classList.contains('open')) positionPanel(trigger, panel);
+            });
+            window.addEventListener('scroll', function() {
+                if (wrap.classList.contains('open')) positionPanel(trigger, panel);
+            }, { passive: true });
+        }
+
+        function closeAll() {
+            document.querySelectorAll('.vx-select-wrap.open').forEach(function(w) { w.classList.remove('open'); });
+            document.querySelectorAll('.vx-select-panel.open').forEach(function(p) { p.classList.remove('open'); });
+        }
+
+        document.addEventListener('click', closeAll);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupVxSelect('gradeWrap',  'gradePanel',  'grade',           'gradeLabel');
+            setupVxSelect('fieldWrap',  'fieldPanel',  'fieldOfInterest', 'fieldLabel');
+        });
+    })();
+    </script>
 
     <!-- Hero: Interactive Network Canvas v3 -->
     <script>
