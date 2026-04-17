@@ -74,112 +74,227 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 20px;
-            padding: 28px;
+            overflow: hidden;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         html:not(.dark) .vx-unified-contact-card {
             background: #fff;
             border: 1px solid rgba(0,0,0,0.08);
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
         }
-        .vx-ucc-header {
+
+        /* Header band */
+        .vx-ucc-header-band {
+            position: relative;
+            padding: 28px 28px 24px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.18) 0%, rgba(139,92,246,0.10) 60%, transparent 100%);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            overflow: hidden;
+        }
+        html:not(.dark) .vx-ucc-header-band {
+            background: linear-gradient(135deg, rgba(99,102,241,0.07) 0%, rgba(139,92,246,0.04) 100%);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .vx-ucc-header-band::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .vx-ucc-header-inner {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
         .vx-ucc-logo-ring {
-            width: 48px; height: 48px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.2));
-            border: 1px solid rgba(99,102,241,0.3);
+            width: 52px; height: 52px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.35), rgba(139,92,246,0.25));
+            border: 1px solid rgba(99,102,241,0.4);
             display: flex; align-items: center; justify-content: center;
-            font-size: 18px;
-            color: #818cf8;
+            font-size: 20px;
+            color: #a5b4fc;
             flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(99,102,241,0.2);
         }
         .vx-ucc-title {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: #f1f5f9;
-            margin: 0 0 3px;
+            margin: 0 0 4px;
             line-height: 1.3;
         }
         html:not(.dark) .vx-ucc-title { color: #0f172a; }
         .vx-ucc-subtitle {
-            font-size: 0.82rem;
+            font-size: 0.83rem;
             color: #64748b;
             margin: 0;
+            line-height: 1.45;
         }
+
+        /* Body */
+        .vx-ucc-body {
+            padding: 24px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            flex: 1;
+        }
+
+        /* Divider */
         .vx-ucc-divider {
             height: 1px;
             background: rgba(255,255,255,0.07);
-            margin: 20px 0;
         }
         html:not(.dark) .vx-ucc-divider { background: rgba(0,0,0,0.07); }
-        .vx-ucc-details { display: flex; flex-direction: column; gap: 12px; }
+
+        /* Section label */
+        .vx-ucc-section-label {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: #475569;
+            margin-bottom: 14px;
+        }
+        .vx-ucc-section-label i { font-size: 11px; }
+
+        /* Contact detail rows */
+        .vx-ucc-details { display: flex; flex-direction: column; gap: 10px; }
         .vx-ucc-detail-row {
             display: flex; align-items: center; gap: 14px;
             text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: background 0.18s, border-color 0.18s;
         }
-        .vx-ucc-link:hover .vx-ucc-value { color: #818cf8; text-decoration: underline; }
+        html:not(.dark) .vx-ucc-detail-row {
+            background: #f8fafc;
+            border-color: rgba(0,0,0,0.06);
+        }
+        .vx-ucc-detail-row:hover {
+            background: rgba(99,102,241,0.08);
+            border-color: rgba(99,102,241,0.2);
+        }
         .vx-ucc-icon-wrap {
-            width: 38px; height: 38px;
-            border-radius: 10px;
+            width: 40px; height: 40px;
+            border-radius: 11px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 14px;
+            font-size: 15px;
             flex-shrink: 0;
         }
-        .vx-ucc-detail-text { display: flex; flex-direction: column; gap: 1px; }
+        .vx-ucc-detail-text { display: flex; flex-direction: column; gap: 2px; }
         .vx-ucc-label {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.07em;
             color: #475569;
         }
         .vx-ucc-value {
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: #cbd5e1;
             font-weight: 500;
-            transition: color 0.15s;
         }
         html:not(.dark) .vx-ucc-value { color: #1e293b; }
-        .vx-ucc-section-label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #475569;
-            margin-bottom: 14px;
+        a.vx-ucc-detail-row:hover .vx-ucc-value { color: #818cf8; }
+
+        /* Category tiles */
+        .vx-ucc-categories {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
-        .vx-ucc-times { display: flex; flex-direction: column; gap: 10px; }
-        .vx-ucc-time-row {
+        .vx-ucc-cat-tile {
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 11px 13px;
+            border-radius: 11px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        html:not(.dark) .vx-ucc-cat-tile {
+            background: #f8fafc;
+            border-color: rgba(0,0,0,0.06);
+        }
+        .vx-ucc-cat-icon {
+            width: 32px; height: 32px;
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .vx-ucc-cat-name {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #94a3b8;
+            line-height: 1.3;
+        }
+        html:not(.dark) .vx-ucc-cat-name { color: #475569; }
+
+        /* Response times */
+        .vx-ucc-times { display: flex; flex-direction: column; gap: 9px; }
+        .vx-ucc-time-row {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        html:not(.dark) .vx-ucc-time-row {
+            background: #f8fafc;
+            border-color: rgba(0,0,0,0.05);
         }
         .vx-ucc-time-dot {
-            width: 7px; height: 7px;
+            width: 8px; height: 8px;
             border-radius: 50%;
             flex-shrink: 0;
         }
         .vx-ucc-time-type {
             flex: 1;
-            font-size: 0.875rem;
+            font-size: 0.855rem;
             color: #94a3b8;
+            font-weight: 500;
         }
         html:not(.dark) .vx-ucc-time-type { color: #475569; }
         .vx-ucc-time-badge {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            padding: 3px 10px;
+            padding: 3px 11px;
             border-radius: 999px;
             letter-spacing: 0.04em;
             white-space: nowrap;
         }
+
+        /* Footer note */
+        .vx-ucc-footer-note {
+            padding: 16px 28px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            color: #475569;
+        }
+        html:not(.dark) .vx-ucc-footer-note { border-top-color: rgba(0,0,0,0.07); }
 
         /* ── Contact Page Custom Dropdowns ── */
         .vx-select-wrap { position: relative; }
@@ -501,74 +616,126 @@
                 </div>
                 
                 <!-- Contact Information — unified card -->
-                <div class="vx-reveal" style="transition-delay:0.1s;">
+                <div class="vx-reveal" style="transition-delay:0.1s; height:100%;">
                     <div class="vx-unified-contact-card">
 
-                        <!-- Header -->
-                        <div class="vx-ucc-header">
-                            <div class="vx-ucc-logo-ring">
-                                <i class="fa-solid fa-paper-plane"></i>
+                        <!-- Header band -->
+                        <div class="vx-ucc-header-band">
+                            <div class="vx-ucc-header-inner">
+                                <div class="vx-ucc-logo-ring">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </div>
+                                <div>
+                                    <h3 class="vx-ucc-title">Contact Us</h3>
+                                    <p class="vx-ucc-subtitle">Send us a message and we will get back to you shortly.</p>
+                                </div>
                             </div>
+                        </div>
+
+                        <div class="vx-ucc-body">
+
+                            <!-- Contact details -->
                             <div>
-                                <h3 class="vx-ucc-title">Get in Touch</h3>
-                                <p class="vx-ucc-subtitle">We're here to help — usually within a day.</p>
+                                <p class="vx-ucc-section-label">
+                                    <i class="fa-solid fa-address-card" style="color:#818cf8;"></i>
+                                    Contact Details
+                                </p>
+                                <div class="vx-ucc-details">
+                                    <a href="mailto:contact@voluntex.com" class="vx-ucc-detail-row">
+                                        <span class="vx-ucc-icon-wrap" style="background:rgba(99,102,241,0.15);">
+                                            <i class="fa-solid fa-envelope" style="color:#818cf8;"></i>
+                                        </span>
+                                        <span class="vx-ucc-detail-text">
+                                            <span class="vx-ucc-label">Email</span>
+                                            <span class="vx-ucc-value">contact@voluntex.com</span>
+                                        </span>
+                                    </a>
+                                    <div class="vx-ucc-detail-row">
+                                        <span class="vx-ucc-icon-wrap" style="background:rgba(16,185,129,0.15);">
+                                            <i class="fa-solid fa-location-dot" style="color:#34d399;"></i>
+                                        </span>
+                                        <span class="vx-ucc-detail-text">
+                                            <span class="vx-ucc-label">Location</span>
+                                            <span class="vx-ucc-value">York Region, Ontario, Canada</span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
+
+                            <div class="vx-ucc-divider"></div>
+
+                            <!-- Inquiry types -->
+                            <div>
+                                <p class="vx-ucc-section-label">
+                                    <i class="fa-solid fa-grid-2" style="color:#c084fc;"></i>
+                                    What We Help With
+                                </p>
+                                <div class="vx-ucc-categories">
+                                    <div class="vx-ucc-cat-tile">
+                                        <span class="vx-ucc-cat-icon" style="background:rgba(99,102,241,0.15);">
+                                            <i class="fa-solid fa-user-graduate" style="color:#818cf8;"></i>
+                                        </span>
+                                        <span class="vx-ucc-cat-name">Student Inquiries</span>
+                                    </div>
+                                    <div class="vx-ucc-cat-tile">
+                                        <span class="vx-ucc-cat-icon" style="background:rgba(16,185,129,0.15);">
+                                            <i class="fa-solid fa-users" style="color:#34d399;"></i>
+                                        </span>
+                                        <span class="vx-ucc-cat-name">Parent Inquiries</span>
+                                    </div>
+                                    <div class="vx-ucc-cat-tile">
+                                        <span class="vx-ucc-cat-icon" style="background:rgba(192,132,252,0.15);">
+                                            <i class="fa-solid fa-handshake" style="color:#c084fc;"></i>
+                                        </span>
+                                        <span class="vx-ucc-cat-name">Partnerships</span>
+                                    </div>
+                                    <div class="vx-ucc-cat-tile">
+                                        <span class="vx-ucc-cat-icon" style="background:rgba(245,158,11,0.15);">
+                                            <i class="fa-solid fa-screwdriver-wrench" style="color:#f59e0b;"></i>
+                                        </span>
+                                        <span class="vx-ucc-cat-name">Technical Support</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="vx-ucc-divider"></div>
+
+                            <!-- Response times -->
+                            <div>
+                                <p class="vx-ucc-section-label">
+                                    <i class="fa-solid fa-clock" style="color:#f59e0b;"></i>
+                                    Response Times
+                                </p>
+                                <div class="vx-ucc-times">
+                                    <div class="vx-ucc-time-row">
+                                        <span class="vx-ucc-time-dot" style="background:#818cf8;"></span>
+                                        <span class="vx-ucc-time-type">General inquiries</span>
+                                        <span class="vx-ucc-time-badge" style="background:rgba(99,102,241,0.15);color:#818cf8;">24 hrs</span>
+                                    </div>
+                                    <div class="vx-ucc-time-row">
+                                        <span class="vx-ucc-time-dot" style="background:#34d399;"></span>
+                                        <span class="vx-ucc-time-type">Student support</span>
+                                        <span class="vx-ucc-time-badge" style="background:rgba(16,185,129,0.15);color:#34d399;">12 hrs</span>
+                                    </div>
+                                    <div class="vx-ucc-time-row">
+                                        <span class="vx-ucc-time-dot" style="background:#f59e0b;"></span>
+                                        <span class="vx-ucc-time-type">Technical issues</span>
+                                        <span class="vx-ucc-time-badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;">6 hrs</span>
+                                    </div>
+                                    <div class="vx-ucc-time-row">
+                                        <span class="vx-ucc-time-dot" style="background:#c084fc;"></span>
+                                        <span class="vx-ucc-time-type">Partnership requests</span>
+                                        <span class="vx-ucc-time-badge" style="background:rgba(192,132,252,0.15);color:#c084fc;">48 hrs</span>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
-                        <div class="vx-ucc-divider"></div>
-
-                        <!-- Contact details -->
-                        <div class="vx-ucc-details">
-                            <a href="mailto:contact@voluntex.com" class="vx-ucc-detail-row vx-ucc-link">
-                                <span class="vx-ucc-icon-wrap" style="background:rgba(99,102,241,0.15);">
-                                    <i class="fa-solid fa-envelope" style="color:#818cf8;"></i>
-                                </span>
-                                <span class="vx-ucc-detail-text">
-                                    <span class="vx-ucc-label">Email</span>
-                                    <span class="vx-ucc-value">contact@voluntex.com</span>
-                                </span>
-                            </a>
-                            <div class="vx-ucc-detail-row">
-                                <span class="vx-ucc-icon-wrap" style="background:rgba(16,185,129,0.15);">
-                                    <i class="fa-solid fa-location-dot" style="color:#34d399;"></i>
-                                </span>
-                                <span class="vx-ucc-detail-text">
-                                    <span class="vx-ucc-label">Location</span>
-                                    <span class="vx-ucc-value">York Region, Ontario, Canada</span>
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="vx-ucc-divider"></div>
-
-                        <!-- Response times -->
-                        <div>
-                            <p class="vx-ucc-section-label">
-                                <i class="fa-solid fa-clock" style="color:#f59e0b;margin-right:6px;"></i>
-                                Response Times
-                            </p>
-                            <div class="vx-ucc-times">
-                                <div class="vx-ucc-time-row">
-                                    <span class="vx-ucc-time-dot" style="background:#818cf8;"></span>
-                                    <span class="vx-ucc-time-type">General inquiries</span>
-                                    <span class="vx-ucc-time-badge" style="background:rgba(99,102,241,0.15);color:#818cf8;">24 h</span>
-                                </div>
-                                <div class="vx-ucc-time-row">
-                                    <span class="vx-ucc-time-dot" style="background:#34d399;"></span>
-                                    <span class="vx-ucc-time-type">Student support</span>
-                                    <span class="vx-ucc-time-badge" style="background:rgba(16,185,129,0.15);color:#34d399;">12 h</span>
-                                </div>
-                                <div class="vx-ucc-time-row">
-                                    <span class="vx-ucc-time-dot" style="background:#f59e0b;"></span>
-                                    <span class="vx-ucc-time-type">Technical issues</span>
-                                    <span class="vx-ucc-time-badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;">6 h</span>
-                                </div>
-                                <div class="vx-ucc-time-row">
-                                    <span class="vx-ucc-time-dot" style="background:#c084fc;"></span>
-                                    <span class="vx-ucc-time-type">Partnership requests</span>
-                                    <span class="vx-ucc-time-badge" style="background:rgba(192,132,252,0.15);color:#c084fc;">48 h</span>
-                                </div>
-                            </div>
+                        <!-- Footer note -->
+                        <div class="vx-ucc-footer-note">
+                            <i class="fa-solid fa-shield-halved" style="color:#818cf8;font-size:13px;flex-shrink:0;"></i>
+                            <span>Your information is kept private and never shared.</span>
                         </div>
 
                     </div>
