@@ -147,7 +147,7 @@
             padding: 28px 28px;
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 28px;
             flex: 1;
         }
 
@@ -162,22 +162,23 @@
         .vx-ucc-section-label {
             display: flex;
             align-items: center;
-            gap: 7px;
-            font-size: 0.72rem;
+            gap: 9px;
+            font-size: 0.8rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.09em;
-            color: #475569;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
             margin-bottom: 14px;
         }
-        .vx-ucc-section-label i { font-size: 11px; }
+        html:not(.dark) .vx-ucc-section-label { color: #64748b; }
+        .vx-ucc-section-label i { font-size: 13px; }
 
         /* Contact detail rows */
         .vx-ucc-details { display: flex; flex-direction: column; gap: 10px; }
         .vx-ucc-detail-row {
             display: flex; align-items: center; gap: 14px;
             text-decoration: none;
-            padding: 12px 14px;
+            padding: 14px 16px;
             border-radius: 12px;
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
@@ -192,13 +193,13 @@
             border-color: rgba(99,102,241,0.2);
         }
         .vx-ucc-icon-wrap {
-            width: 40px; height: 40px;
-            border-radius: 11px;
+            width: 42px; height: 42px;
+            border-radius: 12px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 15px;
+            font-size: 16px;
             flex-shrink: 0;
         }
-        .vx-ucc-detail-text { display: flex; flex-direction: column; gap: 2px; }
+        .vx-ucc-detail-text { display: flex; flex-direction: column; gap: 3px; }
         .vx-ucc-label {
             font-size: 0.7rem;
             font-weight: 600;
@@ -207,7 +208,7 @@
             color: #475569;
         }
         .vx-ucc-value {
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             color: #cbd5e1;
             font-weight: 500;
         }
@@ -218,14 +219,15 @@
         .vx-ucc-categories {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
         }
         .vx-ucc-cat-tile {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             gap: 10px;
-            padding: 11px 13px;
-            border-radius: 11px;
+            padding: 16px 14px;
+            border-radius: 12px;
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
         }
@@ -234,28 +236,28 @@
             border-color: rgba(0,0,0,0.06);
         }
         .vx-ucc-cat-icon {
-            width: 32px; height: 32px;
-            border-radius: 9px;
+            width: 36px; height: 36px;
+            border-radius: 10px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 13px;
+            font-size: 15px;
             flex-shrink: 0;
         }
         .vx-ucc-cat-name {
-            font-size: 0.78rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            color: #94a3b8;
+            color: #cbd5e1;
             line-height: 1.3;
         }
-        html:not(.dark) .vx-ucc-cat-name { color: #475569; }
+        html:not(.dark) .vx-ucc-cat-name { color: #334155; }
 
         /* Response times */
         .vx-ucc-times { display: flex; flex-direction: column; gap: 9px; }
         .vx-ucc-time-row {
             display: flex;
             align-items: center;
-            gap: 11px;
-            padding: 10px 14px;
-            border-radius: 10px;
+            gap: 12px;
+            padding: 13px 16px;
+            border-radius: 11px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.05);
         }
@@ -270,7 +272,7 @@
         }
         .vx-ucc-time-type {
             flex: 1;
-            font-size: 0.855rem;
+            font-size: 0.9rem;
             color: #94a3b8;
             font-weight: 500;
         }
@@ -654,7 +656,7 @@
                             <!-- Inquiry types -->
                             <div>
                                 <p class="vx-ucc-section-label">
-                                    <i class="fa-solid fa-grid-2" style="color:#c084fc;"></i>
+                                    <i class="fa-solid fa-grip" style="color:#c084fc;"></i>
                                     What We Help With
                                 </p>
                                 <div class="vx-ucc-categories">
