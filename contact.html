@@ -69,6 +69,118 @@
             }
         }
 
+        /* ── Unified Contact Info Card ── */
+        .vx-unified-contact-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+        html:not(.dark) .vx-unified-contact-card {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        .vx-ucc-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        .vx-ucc-logo-ring {
+            width: 48px; height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(139,92,246,0.2));
+            border: 1px solid rgba(99,102,241,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+            color: #818cf8;
+            flex-shrink: 0;
+        }
+        .vx-ucc-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin: 0 0 3px;
+            line-height: 1.3;
+        }
+        html:not(.dark) .vx-ucc-title { color: #0f172a; }
+        .vx-ucc-subtitle {
+            font-size: 0.82rem;
+            color: #64748b;
+            margin: 0;
+        }
+        .vx-ucc-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.07);
+            margin: 20px 0;
+        }
+        html:not(.dark) .vx-ucc-divider { background: rgba(0,0,0,0.07); }
+        .vx-ucc-details { display: flex; flex-direction: column; gap: 12px; }
+        .vx-ucc-detail-row {
+            display: flex; align-items: center; gap: 14px;
+            text-decoration: none;
+        }
+        .vx-ucc-link:hover .vx-ucc-value { color: #818cf8; text-decoration: underline; }
+        .vx-ucc-icon-wrap {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .vx-ucc-detail-text { display: flex; flex-direction: column; gap: 1px; }
+        .vx-ucc-label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            color: #475569;
+        }
+        .vx-ucc-value {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        html:not(.dark) .vx-ucc-value { color: #1e293b; }
+        .vx-ucc-section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #475569;
+            margin-bottom: 14px;
+        }
+        .vx-ucc-times { display: flex; flex-direction: column; gap: 10px; }
+        .vx-ucc-time-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .vx-ucc-time-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .vx-ucc-time-type {
+            flex: 1;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+        html:not(.dark) .vx-ucc-time-type { color: #475569; }
+        .vx-ucc-time-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 999px;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
         /* ── Contact Page Custom Dropdowns ── */
         .vx-select-wrap { position: relative; }
         .vx-select-trigger {
@@ -388,77 +500,78 @@
                     </div>
                 </div>
                 
-                <!-- Contact Information -->
-                <div class="space-y-5">
+                <!-- Contact Information — unified card -->
+                <div class="vx-reveal" style="transition-delay:0.1s;">
+                    <div class="vx-unified-contact-card">
 
-                    <!-- General Contact -->
-                    <div class="vx-info-card vx-reveal" style="transition-delay:0.1s;">
-                        <div class="vx-info-card-icon" style="background:rgba(59,130,246,0.15);">
-                            <i class="fa-solid fa-envelope" style="color:#3b82f6;"></i>
-                        </div>
-                        <h3 data-translate="generalInquiries">General Inquiries</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-envelope text-xs" style="color:#3b82f6;"></i>
-                                <a href="mailto:hello@voluntex.org" class="detail">hello@voluntex.org</a>
+                        <!-- Header -->
+                        <div class="vx-ucc-header">
+                            <div class="vx-ucc-logo-ring">
+                                <i class="fa-solid fa-paper-plane"></i>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-map-marker-alt text-xs" style="color:#3b82f6;"></i>
-                                <span class="detail">York Region, Ontario, Canada</span>
+                            <div>
+                                <h3 class="vx-ucc-title">Get in Touch</h3>
+                                <p class="vx-ucc-subtitle">We're here to help — usually within a day.</p>
                             </div>
                         </div>
+
+                        <div class="vx-ucc-divider"></div>
+
+                        <!-- Contact details -->
+                        <div class="vx-ucc-details">
+                            <a href="mailto:contact@voluntex.com" class="vx-ucc-detail-row vx-ucc-link">
+                                <span class="vx-ucc-icon-wrap" style="background:rgba(99,102,241,0.15);">
+                                    <i class="fa-solid fa-envelope" style="color:#818cf8;"></i>
+                                </span>
+                                <span class="vx-ucc-detail-text">
+                                    <span class="vx-ucc-label">Email</span>
+                                    <span class="vx-ucc-value">contact@voluntex.com</span>
+                                </span>
+                            </a>
+                            <div class="vx-ucc-detail-row">
+                                <span class="vx-ucc-icon-wrap" style="background:rgba(16,185,129,0.15);">
+                                    <i class="fa-solid fa-location-dot" style="color:#34d399;"></i>
+                                </span>
+                                <span class="vx-ucc-detail-text">
+                                    <span class="vx-ucc-label">Location</span>
+                                    <span class="vx-ucc-value">York Region, Ontario, Canada</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="vx-ucc-divider"></div>
+
+                        <!-- Response times -->
+                        <div>
+                            <p class="vx-ucc-section-label">
+                                <i class="fa-solid fa-clock" style="color:#f59e0b;margin-right:6px;"></i>
+                                Response Times
+                            </p>
+                            <div class="vx-ucc-times">
+                                <div class="vx-ucc-time-row">
+                                    <span class="vx-ucc-time-dot" style="background:#818cf8;"></span>
+                                    <span class="vx-ucc-time-type">General inquiries</span>
+                                    <span class="vx-ucc-time-badge" style="background:rgba(99,102,241,0.15);color:#818cf8;">24 h</span>
+                                </div>
+                                <div class="vx-ucc-time-row">
+                                    <span class="vx-ucc-time-dot" style="background:#34d399;"></span>
+                                    <span class="vx-ucc-time-type">Student support</span>
+                                    <span class="vx-ucc-time-badge" style="background:rgba(16,185,129,0.15);color:#34d399;">12 h</span>
+                                </div>
+                                <div class="vx-ucc-time-row">
+                                    <span class="vx-ucc-time-dot" style="background:#f59e0b;"></span>
+                                    <span class="vx-ucc-time-type">Technical issues</span>
+                                    <span class="vx-ucc-time-badge" style="background:rgba(245,158,11,0.15);color:#f59e0b;">6 h</span>
+                                </div>
+                                <div class="vx-ucc-time-row">
+                                    <span class="vx-ucc-time-dot" style="background:#c084fc;"></span>
+                                    <span class="vx-ucc-time-type">Partnership requests</span>
+                                    <span class="vx-ucc-time-badge" style="background:rgba(192,132,252,0.15);color:#c084fc;">48 h</span>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
-                    <!-- Student Support -->
-                    <div class="vx-info-card vx-reveal" style="transition-delay:0.2s;">
-                        <div class="vx-info-card-icon" style="background:rgba(16,185,129,0.15);">
-                            <i class="fa-solid fa-graduation-cap" style="color:#10b981;"></i>
-                        </div>
-                        <h3 data-translate="studentSupportLabel">Student Support</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-envelope text-xs" style="color:#10b981;"></i>
-                                <a href="mailto:students@voluntex.org" class="detail">students@voluntex.org</a>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-clock text-xs" style="color:#10b981;"></i>
-                                <span class="detail" data-translate="responseWithin24">Response within 24 hours</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Organization Partnerships -->
-                    <div class="vx-info-card vx-reveal" style="transition-delay:0.3s;">
-                        <div class="vx-info-card-icon" style="background:rgba(168,85,247,0.15);">
-                            <i class="fa-solid fa-handshake" style="color:#a855f7;"></i>
-                        </div>
-                        <h3 data-translate="orgPartnerships">Organization Partnerships</h3>
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-envelope text-xs" style="color:#a855f7;"></i>
-                                <a href="mailto:partnerships@voluntex.org" class="detail">partnerships@voluntex.org</a>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-building text-xs" style="color:#a855f7;"></i>
-                                <span class="detail" data-translate="joinNetwork">Join our network of 25+ organizations</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Response Times -->
-                    <div class="vx-info-card vx-reveal" style="transition-delay:0.4s;">
-                        <div class="vx-info-card-icon" style="background:rgba(245,158,11,0.15);">
-                            <i class="fa-solid fa-clock" style="color:#f59e0b;"></i>
-                        </div>
-                        <h3 data-translate="responseTimes">Response Times</h3>
-                        <ul class="space-y-1">
-                            <li class="detail text-sm" data-translate="responseTimeGeneral">• General inquiries: Within 24 hours</li>
-                            <li class="detail text-sm" data-translate="responseTimeStudent">• Student support: Within 12 hours</li>
-                            <li class="detail text-sm" data-translate="responseTimeTechnical">• Technical issues: Within 6 hours</li>
-                            <li class="detail text-sm" data-translate="responseTimePartnership">• Partnership requests: Within 48 hours</li>
-                        </ul>
-                    </div>
-
                 </div>
             </div>
         </div>
