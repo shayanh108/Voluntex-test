@@ -523,8 +523,8 @@ html:not(.dark) .vx-org-card-theme {
 html:not(.dark) .vx-card-img-overlay {
     background: linear-gradient(to top, rgba(15,23,42,0.7) 0%, transparent 55%);
 }
-html:not(.dark) .vx-card-title  { color: #ffffff; }
-html:not(.dark) .vx-card-desc   { color: rgba(255,255,255,0.85); }
+html:not(.dark) .vx-card-title  { color: #1e293b !important; }
+html:not(.dark) .vx-card-desc   { color: #475569 !important; }
 html:not(.dark) .vx-org-card h3 { color: #ffffff !important; }
 html:not(.dark) .vx-org-card p  { color: rgba(255,255,255,0.85) !important; }
 html:not(.dark) .vx-org-card .vx-org-card-badge { color: #ffffff !important; }
