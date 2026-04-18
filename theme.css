@@ -527,6 +527,7 @@ html:not(.dark) .vx-card-title  { color: #ffffff; }
 html:not(.dark) .vx-card-desc   { color: rgba(255,255,255,0.85); }
 html:not(.dark) .vx-org-card h3 { color: #ffffff !important; }
 html:not(.dark) .vx-org-card p  { color: rgba(255,255,255,0.85) !important; }
+html:not(.dark) .vx-org-card .vx-org-card-badge { color: #ffffff !important; }
 html:not(.dark) .vx-card-pill   {
     background: rgba(0,0,0,0.05);
     color: #374151;
