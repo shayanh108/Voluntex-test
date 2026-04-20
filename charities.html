@@ -762,18 +762,38 @@
     
     <!-- Quick Filter Function -->
     <script>
+        function syncCauseDropdownUI(value) {
+            var panel   = document.getElementById('causePanel');
+            var label   = document.getElementById('causeLabel');
+            var trigIcon = document.querySelector('#causeTrigger .trigger-icon');
+            if (!panel) return;
+            panel.querySelectorAll('.custom-option').forEach(function(opt) {
+                opt.classList.remove('selected');
+                if (opt.dataset.value === value) {
+                    opt.classList.add('selected');
+                    label.textContent = opt.textContent.trim();
+                    var optIcon = opt.querySelector('.opt-icon i');
+                    if (optIcon && trigIcon) { trigIcon.className = optIcon.className + ' trigger-icon'; }
+                }
+            });
+        }
+
         function quickFilter(cause, btn) {
             const pills = document.querySelectorAll('.quick-filter-btn');
             const causeSelect = document.getElementById('causeFilter');
+            var activeValue;
             // Toggle off if already active
             if (btn && btn.classList.contains('active')) {
                 btn.classList.remove('active');
                 causeSelect.value = '';
+                activeValue = '';
             } else {
                 pills.forEach(p => p.classList.remove('active'));
                 if (btn) btn.classList.add('active');
                 causeSelect.value = cause;
+                activeValue = cause;
             }
+            syncCauseDropdownUI(activeValue);
             causeSelect.dispatchEvent(new Event('change'));
         }
         // Clear active pill when dropdown is changed manually
@@ -822,6 +842,9 @@
                         panel.querySelectorAll('.custom-option').forEach(function(b) { b.classList.remove('selected'); });
                         this.classList.add('selected');
                         label.textContent = this.textContent.trim();
+                        var optIcon = this.querySelector('.opt-icon i');
+                        var trigIcon = trigger.querySelector('.trigger-icon');
+                        if (optIcon && trigIcon) { trigIcon.className = optIcon.className + ' trigger-icon'; }
                         native.value = val;
                         native.dispatchEvent(new Event('change'));
                         closeAll();
