@@ -118,7 +118,7 @@ const organizations = [
         address: "1614 Metro Rd N, Willow Beach, ON L0E 1S0",
         description: "An ecological hub on Lake Simcoe engaging youth through science, technology, and the arts.",
         descriptionFr: "Un carrefour écologique sur le lac Simcoe qui engage les jeunes à travers les sciences, la technologie et les arts.",
-        image: "https://clearwaterfarm.ca/wp-content/uploads/2023/06/CWF-LOGO-BlueBG.png",
+        image: "https://clearwaterfarm.ca/wp-content/uploads/2023/06/CW-Logo-Horizontal-WHITE.png",
         imageFit: "contain",
         imageBg: "#0d2b5e"
     },
