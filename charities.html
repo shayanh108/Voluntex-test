@@ -116,7 +116,7 @@
         .custom-select-wrap.open .custom-select-chevron { transform: rotate(180deg); }
 
         .custom-select-panel {
-            position: absolute;
+            position: fixed;
             background: #fff;
             border: 1px solid rgba(148,163,184,0.5);
             border-radius: 12px;
@@ -807,7 +807,7 @@
             /* ── Custom dropdowns (fixed-position panels to avoid clipping) ── */
             function positionPanel(trigger, panel) {
                 var r = trigger.getBoundingClientRect();
-                panel.style.top    = (r.bottom + window.scrollY + 6) + 'px';
+                panel.style.top    = (r.bottom + 6) + 'px';
                 panel.style.left   = r.left + 'px';
                 panel.style.width  = r.width + 'px';
                 panel.style.right  = 'auto';
