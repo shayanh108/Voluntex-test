@@ -1008,7 +1008,7 @@ function createOrganizationCard(org, index) {
 
     card.innerHTML = `
         <div class="relative overflow-hidden" style="height:200px;${org.imageBg ? `background:${org.imageBg};` : ''}">
-            <img src="${org.image}" alt="${org.name}" class="w-full h-full" style="object-fit:${org.imageFit || 'cover'};transition:transform 0.5s ease;${org.imageFit === 'contain' ? 'transform:scale(0.72);' : ''}">
+            <img src="${org.image}" alt="${org.name}" class="w-full h-full" style="object-fit:${org.imageFit || 'cover'};transition:transform 0.5s ease;${org.imageFit === 'contain' ? 'transform:scale(0.80);' : ''}">
             <div class="vx-card-img-overlay absolute inset-0"></div>
         </div>
         <div class="vx-card-body" style="padding:1.5rem;display:flex;flex-direction:column;flex:1;gap:0.75rem;">
@@ -1038,7 +1038,7 @@ function createOrganizationCard(org, index) {
 
     // Image zoom on hover
     const img = card.querySelector('img');
-    const baseScale = org.imageFit === 'contain' ? 0.72 : 1;
+    const baseScale = org.imageFit === 'contain' ? 0.80 : 1;
     card.addEventListener('mouseenter', () => { img.style.transform = `scale(${baseScale * 1.07})`; });
     card.addEventListener('mouseleave', () => { img.style.transform = `scale(${baseScale})`; });
 
