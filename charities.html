@@ -57,14 +57,14 @@
         .filter-card-wrap {
             position: relative;
             border-radius: 20px;
-            padding: 1px;
-            background: rgba(148,163,184,0.55);
+            padding: 2px;
+            background: rgba(148,163,184,0.7);
             box-shadow: 0 8px 32px rgba(0,0,0,0.08);
             opacity: 0;
             transform: translateY(18px);
         }
         .dark .filter-card-wrap {
-            background: rgba(55,65,81,0.75);
+            background: rgba(99,102,241,0.45);
             box-shadow: 0 8px 40px rgba(0,0,0,0.3);
         }
         /* animated gradient border — subtle on hover */
@@ -73,7 +73,7 @@
             position: absolute;
             inset: 0;
             border-radius: 20px;
-            padding: 1px;
+            padding: 2px;
             background: conic-gradient(from var(--angle, 0deg), #6366f1, #3b82f6, #8b5cf6, #60a5fa, #6366f1);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
@@ -81,7 +81,7 @@
             opacity: 0;
             transition: opacity 0.5s;
         }
-        .filter-card-wrap:hover::before { opacity: 0.6; }
+        .filter-card-wrap:hover::before { opacity: 0.75; }
         @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
         @keyframes borderSpin { to { --angle: 360deg; } }
         .filter-card-wrap:hover { animation: borderSpin 4s linear infinite; }
