@@ -116,11 +116,11 @@ const organizations = [
         email: "",
         phone: "(416) 543-0401",
         address: "1614 Metro Rd N, Willow Beach, ON L0E 1S0",
-        description: "An ecological not-for-profit on Lake Simcoe engaging youth and the community through science, technology, and the arts to cultivate a flourishing future.",
-        descriptionFr: "Un organisme écologique à but non lucratif sur le lac Simcoe qui engage les jeunes et la communauté à travers les sciences, la technologie et les arts.",
+        description: "An ecological hub on Lake Simcoe engaging youth through science, technology, and the arts.",
+        descriptionFr: "Un carrefour écologique sur le lac Simcoe qui engage les jeunes à travers les sciences, la technologie et les arts.",
         image: "https://clearwaterfarm.ca/wp-content/uploads/2023/06/CWF-LOGO-BlueBG.png",
         imageFit: "contain",
-        imageBg: "#1a3a5c"
+        imageBg: "#0d2b5e"
     },
     {
         name: "Yellow Brick House",
@@ -1008,7 +1008,7 @@ function createOrganizationCard(org, index) {
 
     card.innerHTML = `
         <div class="relative overflow-hidden" style="height:200px;${org.imageBg ? `background:${org.imageBg};` : ''}">
-            <img src="${org.image}" alt="${org.name}" class="w-full h-full" style="object-fit:${org.imageFit || 'cover'};transition:transform 0.5s ease;${org.imageFit === 'contain' ? 'padding:1.5rem;' : ''}">
+            <img src="${org.image}" alt="${org.name}" class="w-full h-full" style="object-fit:${org.imageFit || 'cover'};transition:transform 0.5s ease;">
             <div class="vx-card-img-overlay absolute inset-0"></div>
         </div>
         <div class="vx-card-body" style="padding:1.5rem;display:flex;flex-direction:column;flex:1;gap:0.75rem;">
