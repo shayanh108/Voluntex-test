@@ -182,15 +182,18 @@
             border-radius: 12px;
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
-            transition: background 0.18s, border-color 0.18s;
+            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
         }
         html:not(.dark) .vx-ucc-detail-row {
             background: #f8fafc;
             border-color: rgba(0,0,0,0.06);
         }
         .vx-ucc-detail-row:hover {
-            background: rgba(99,102,241,0.08);
-            border-color: rgba(99,102,241,0.2);
+            background: rgba(99,102,241,0.1);
+            border-color: rgba(99,102,241,0.35);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(99,102,241,0.18);
         }
         .vx-ucc-icon-wrap {
             width: 42px; height: 42px;
@@ -230,11 +233,20 @@
             border-radius: 12px;
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.06);
+            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
         }
         html:not(.dark) .vx-ucc-cat-tile {
             background: #f8fafc;
             border-color: rgba(0,0,0,0.06);
         }
+        .vx-ucc-cat-tile:hover {
+            background: rgba(99,102,241,0.1);
+            border-color: rgba(99,102,241,0.35);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 28px rgba(99,102,241,0.2);
+        }
+        .vx-ucc-cat-tile:hover .vx-ucc-cat-name { color: #a5b4fc; }
         .vx-ucc-cat-icon {
             width: 36px; height: 36px;
             border-radius: 10px;
@@ -260,10 +272,23 @@
             border-radius: 11px;
             background: rgba(255,255,255,0.02);
             border: 1px solid rgba(255,255,255,0.05);
+            transition: background 0.2s, border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+            cursor: default;
         }
         html:not(.dark) .vx-ucc-time-row {
             background: #f8fafc;
             border-color: rgba(0,0,0,0.05);
+        }
+        .vx-ucc-time-row:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.15);
+            transform: translateY(-2px) translateX(3px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+        html:not(.dark) .vx-ucc-time-row:hover {
+            background: #f1f5f9;
+            border-color: rgba(99,102,241,0.2);
+            box-shadow: 0 6px 18px rgba(99,102,241,0.1);
         }
         .vx-ucc-time-dot {
             width: 8px; height: 8px;
